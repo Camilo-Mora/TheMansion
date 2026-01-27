@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE MANSION | Architect Reference Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div id="global-bg"></div>
+    <div id="global-overlay"></div>
+
+    <nav>
+        <div class="logo">THE MANSION</div>
+        <div class="nav-links">
+            <a href="#vision">THE VISION</a>
+            <a href="#library">REFERENCE LIBRARY</a>
+            <a href="#highlights">HIGHLIGHTS</a>
+        </div>
+    </nav>
+
+    <header>
+        <p>Architectural Concept</p>
+        <h1>THE MANSION</h1>
+        <div class="divider" style="width: 100px; height: 1px; background: var(--accent-color); margin: 30px auto;">
+        </div>
+    </header>
+
+    <!-- Land Section -->
+    <section id="land">
+        <div class="section-head">
+            <h2>Land to build in</h2>
+            <div class="divider"></div>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Establishing the context: The
+                mountain terrain designated for the project.</p>
+        </div>
+        <div class="grid" id="land-grid">
+            <!-- Dynamically Populated -->
+        </div>
+    </section>
+
+    <!-- Master Vision Section -->
+    <section id="vision">
+        <div class="section-head">
+            <h2>Master Concepts</h2>
+            <div class="divider"></div>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">The core architectural blueprints
+                and full-scale visualizations of the final structure.</p>
+        </div>
+        <div class="grid" id="vision-grid">
+            <!-- Dynamically Populated -->
+        </div>
+    </section>
+
+    <!-- Cinematic Highlights Section -->
+    <section id="highlights" style="background: rgba(255,255,255,0.02);">
+        <div class="section-head">
+            <h2>Cinematic Highlights</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="grid" id="highlights-grid">
+            <!-- Dynamically Populated -->
+        </div>
+    </section>
+
+    <!-- Reference Library Section -->
+    <section id="library">
+        <div class="section-head">
+            <h2>Reference Library</h2>
+            <div class="divider"></div>
+            <div class="filters" id="category-filters">
+                <button class="filter-btn active" data-category="all">All References</button>
+                <!-- Categories will be added here -->
+            </div>
+        </div>
+        <div class="grid" id="library-grid">
+            <!-- Dynamically Populated -->
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox">
+        <div id="lightbox-close">&times;</div>
+        <div id="lightbox-content">
+            <div id="lightbox-media-container"></div>
+            <h4 id="lightbox-title"></h4>
+        </div>
+    </div>
+
+    <footer>
+        <div
+            style="padding: 100px 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);">
+            &copy; 2026 THE MANSION PROJECT | ARCHITECTURAL VISION
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
