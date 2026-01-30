@@ -1,10 +1,13 @@
 const ASSET_DATA = {
-    mountains: ['MountainProfile01.jpg', 'MountainProfile02.png', 'MountainProfile03.jpg'],
+    mountains: [
+        'MountainProfile01.jpg', 'MountainProfile02.png', 'MountainProfile03.jpg',
+        'FullConcept_Topography.jpg', 'FullConcept_Floorplan.png'
+    ],
     vision: [
         'FullConcept00.png', 'FullConcept000.png', 'FullConcept01.png', 'FullConcept02.jpeg',
         'FullConcept03.png', 'FullConcept04.png', 'FullConcept05.jpg', 'FullConcept05.png',
         'FullConcept06.jpg', 'FullConcept06.png', 'FullConcept07.png',
-        'FullConcept07_Floorplan.png', 'FullConcept_Floorplan.png'
+        'FullConcept07_Floorplan.png'
     ],
     highlights: [
         'Best00.mp4', 'Best000.mp4', 'Best01.mp4', 'Best02.mp4', 'Best03.mp4',
