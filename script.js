@@ -1,7 +1,11 @@
 const ASSET_DATA = {
     mountains: [
-        'MountainProfile01.jpg', 'MountainProfile02.png', 'MountainProfile03.jpg',
-        'FullConcept_Topography.jpg', 'FullConcept_Floorplan.png'
+        { file: 'MountainProfile01.jpg', title: 'LAND CONTEXT' },
+        { file: 'MountainProfile02.png', title: 'LAND CONTEXT' },
+        { file: 'MountainProfile03.jpg', title: 'LAND CONTEXT' },
+        { file: 'FullConcept_Topography.jpg', title: 'LAND CONTEXT' },
+        { file: 'FullConcept_Floorplan_FrontView.png', title: 'Frontal layout' },
+        { file: 'FullConcept_Floorplan_LateralView.png', title: 'Lateral layout' }
     ],
     vision: [
         'FullConcept00.png', 'FullConcept000.png', 'FullConcept01.png', 'FullConcept02.jpeg',
@@ -84,7 +88,7 @@ function initBackground() {
     let current = 0;
 
     const changeBg = () => {
-        bg.style.backgroundImage = `url('${ASSET_DATA.mountains[current]}')`;
+        bg.style.backgroundImage = `url('${ASSET_DATA.mountains[current].file}')`;
         current = (current + 1) % ASSET_DATA.mountains.length;
     };
 
@@ -132,8 +136,8 @@ function createCard(filename, title, index) {
 
 function renderLand() {
     const grid = document.getElementById('land-grid');
-    ASSET_DATA.mountains.forEach((file, i) => {
-        grid.appendChild(createCard(file, 'LAND CONTEXT', i + 1));
+    ASSET_DATA.mountains.forEach((item, i) => {
+        grid.appendChild(createCard(item.file, item.title, i + 1));
     });
 }
 
