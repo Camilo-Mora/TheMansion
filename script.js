@@ -1,10 +1,17 @@
 const ASSET_DATA = {
-    mountains: ['MountainProfile01.jpg', 'MountainProfile02.png', 'MountainProfile03.jpg'],
+    mountains: [
+        { file: 'MountainProfile01.jpg', title: 'LAND CONTEXT' },
+        { file: 'MountainProfile02.png', title: 'LAND CONTEXT' },
+        { file: 'MountainProfile03.jpg', title: 'LAND CONTEXT' },
+        { file: 'FullConcept_Topography.jpg', title: 'LAND CONTEXT' },
+        { file: 'FullConcept_Floorplan_FrontView.png', title: 'Frontal layout' },
+        { file: 'FullConcept_Floorplan_LateralView.png', title: 'Lateral layout' }
+    ],
     vision: [
         'FullConcept00.png', 'FullConcept000.png', 'FullConcept01.png', 'FullConcept02.jpeg',
         'FullConcept03.png', 'FullConcept04.png', 'FullConcept05.jpg', 'FullConcept05.png',
         'FullConcept06.jpg', 'FullConcept06.png', 'FullConcept07.png',
-        'FullConcept07_Floorplan.png', 'FullConcept_Floorplan.png'
+        'FullConcept07_Floorplan.png'
     ],
     highlights: [
         'Best00.mp4', 'Best000.mp4', 'Best01.mp4', 'Best02.mp4', 'Best03.mp4',
@@ -19,8 +26,8 @@ const ASSET_DATA = {
         { file: 'Bedbunk01.jpg', category: 'Bedroom' }, { file: 'Bedbunk02.jpg', category: 'Bedroom' },
         { file: 'Bedbunk03.jpg', category: 'Bedroom' }, { file: 'Bedbunk04.png', category: 'Bedroom' },
         { file: 'Bedbunk05.jpg', category: 'Bedroom' }, { file: 'Bedbunk06.jpg', category: 'Bedroom' },
-        { file: 'BioPool01.mp4', category: 'Nature' }, { file: 'BioPool02.mp4', category: 'Nature' },
-        { file: 'BioPool03.mp4', category: 'Nature' },
+        { file: 'BioPool01.mp4', category: 'Pool' }, { file: 'BioPool02.mp4', category: 'Pool' },
+        { file: 'BioPool03.mp4', category: 'Pool' },
         { file: 'Cocina01.jpg', category: 'Kitchen' }, { file: 'Cocina02.jpg', category: 'Kitchen' },
         { file: 'Cocina03.jpg', category: 'Kitchen' }, { file: 'Cocina04.jpg', category: 'Kitchen' },
         { file: 'Cocina05.jpg', category: 'Kitchen' }, { file: 'Cocina06.jpg', category: 'Kitchen' },
@@ -43,13 +50,14 @@ const ASSET_DATA = {
         { file: 'Master17.jpg', category: 'Master Suite' }, { file: 'Master18.jpg', category: 'Master Suite' },
         { file: 'Pasillo01.jpg', category: 'Flow' }, { file: 'Pasillo02.jpg', category: 'Flow' },
         { file: 'Pasillo03.jpg', category: 'Flow' }, { file: 'Pasillo04.jpg', category: 'Flow' },
-        { file: 'Pond01.jpg', category: 'Nature' }, { file: 'Pond02.jpg', category: 'Nature' },
-        { file: 'Pool01.png', category: 'Nature' }, { file: 'Pool06.jpg', category: 'Nature' },
-        { file: 'Pool07.jpg', category: 'Nature' }, { file: 'Pool13.jpg', category: 'Nature' },
-        { file: 'Pool15.jpg', category: 'Nature' }, { file: 'Pool18.jpg', category: 'Nature' },
-        { file: 'Pool21.jpg', category: 'Nature' }, { file: 'Pool22.jpg', category: 'Nature' },
-        { file: 'Pool24.jpg', category: 'Nature' }, { file: 'Pool25.jpg', category: 'Nature' },
-        { file: 'Pool26.jpg', category: 'Nature' }, { file: 'Pool28.jpg', category: 'Nature' },
+        { file: 'Pond01.jpg', category: 'Pool' }, { file: 'Pond02.jpg', category: 'Pool' },
+        { file: 'Pool01.png', category: 'Pool' }, { file: 'Pool06.jpg', category: 'Pool' },
+        { file: 'Pool07.jpg', category: 'Pool' }, { file: 'Pool13.jpg', category: 'Pool' },
+        { file: 'Pool15.jpg', category: 'Pool' }, { file: 'Pool18.jpg', category: 'Pool' },
+        { file: 'Pool21.jpg', category: 'Pool' }, { file: 'Pool22.jpg', category: 'Pool' },
+        { file: 'Pool24.jpg', category: 'Pool' }, { file: 'Pool25.jpg', category: 'Pool' },
+        { file: 'Pool26.jpg', category: 'Pool' }, { file: 'Pool28.jpg', category: 'Pool' },
+        { file: 'Pool29.mp4', category: 'Pool' },
         { file: 'Lobby01.png', category: 'Flow' },
         { file: 'Concept00.png', category: 'Studies' }, { file: 'Concept01.jpeg', category: 'Studies' },
         { file: 'Concept02.jpg', category: 'Studies' }, { file: 'Concept03.jpg', category: 'Studies' },
@@ -81,7 +89,7 @@ function initBackground() {
     let current = 0;
 
     const changeBg = () => {
-        bg.style.backgroundImage = `url('${ASSET_DATA.mountains[current]}')`;
+        bg.style.backgroundImage = `url('${ASSET_DATA.mountains[current].file}')`;
         current = (current + 1) % ASSET_DATA.mountains.length;
     };
 
@@ -129,8 +137,8 @@ function createCard(filename, title, index) {
 
 function renderLand() {
     const grid = document.getElementById('land-grid');
-    ASSET_DATA.mountains.forEach((file, i) => {
-        grid.appendChild(createCard(file, 'LAND CONTEXT', i + 1));
+    ASSET_DATA.mountains.forEach((item, i) => {
+        grid.appendChild(createCard(item.file, item.title, i + 1));
     });
 }
 
