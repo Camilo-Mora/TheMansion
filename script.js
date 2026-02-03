@@ -27,7 +27,7 @@ const ASSET_DATA = {
         { file: 'Bedbunk03.jpg', category: 'Bedroom' }, { file: 'Bedbunk04.png', category: 'Bedroom' },
         { file: 'Bedbunk05.jpg', category: 'Bedroom' }, { file: 'Bedbunk06.jpg', category: 'Bedroom' },
         { file: 'BioPool01.mp4', category: 'Pool' }, { file: 'BioPool02.mp4', category: 'Pool' },
-        { file: 'BioPool03.mp4', category: 'Pool' },
+        { file: 'BioPool03.mp4', category: 'Pool' }, { file: 'BioPool04.mp4', category: 'Pool' },
         { file: 'Cocina01.jpg', category: 'Kitchen' }, { file: 'Cocina02.jpg', category: 'Kitchen' },
         { file: 'Cocina03.jpg', category: 'Kitchen' }, { file: 'Cocina04.jpg', category: 'Kitchen' },
         { file: 'Cocina05.jpg', category: 'Kitchen' }, { file: 'Cocina06.jpg', category: 'Kitchen' },
