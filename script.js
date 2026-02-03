@@ -11,7 +11,7 @@ const ASSET_DATA = {
         'FullConcept00.png', 'FullConcept000.png', 'FullConcept01.png', 'FullConcept02.jpeg',
         'FullConcept03.png', 'FullConcept04.png', 'FullConcept05.jpg', 'FullConcept05.png',
         'FullConcept06.jpg', 'FullConcept06.png', 'FullConcept07.png',
-        'FullConcept07_Floorplan.png'
+        'FullConcept07_Floorplan.png', 'FullConcept13.jpg', 'FullConcept14.jpg'
     ],
     highlights: [
         'Best00.mp4', 'Best000.mp4', 'Best01.mp4', 'Best02.mp4', 'Best03.mp4',
