@@ -94,7 +94,12 @@ function initBackground() {
     let current = 0;
 
     const changeBg = () => {
-        bg.style.backgroundImage = `url('${ASSET_DATA.mountains[current].file}')`;
+        const file = ASSET_DATA.mountains[current].file;
+        const img = new Image();
+        img.onload = () => {
+            bg.style.backgroundImage = `url('${file}')`;
+        };
+        img.src = file;
         current = (current + 1) % ASSET_DATA.mountains.length;
     };
 
@@ -104,7 +109,7 @@ function initBackground() {
 
 function createCard(filename, title, index) {
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'card loading';
 
     if (index !== undefined) {
         const num = document.createElement('div');
@@ -116,16 +121,49 @@ function createCard(filename, title, index) {
     let media;
     if (isVideo(filename)) {
         media = document.createElement('video');
-        media.src = filename;
+        media.dataset.src = filename;
         media.muted = true;
         media.loop = true;
         media.playsInline = true;
-        card.addEventListener('mouseenter', () => media.play());
-        card.addEventListener('mouseleave', () => { media.pause(); media.currentTime = 0; });
+        media.preload = 'none';
+
+        media.onloadeddata = () => card.classList.add('loaded');
+        media.onerror = () => {
+            card.classList.remove('loading');
+            card.classList.add('error');
+        };
+
+        card.addEventListener('mouseenter', () => {
+            if (!media.src) media.src = media.dataset.src;
+            media.play();
+        });
+        card.addEventListener('mouseleave', () => {
+            media.pause();
+            media.currentTime = 0;
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!media.src) {
+                        media.src = media.dataset.src;
+                        media.preload = 'metadata';
+                    }
+                    observer.unobserve(card);
+                }
+            });
+        }, { rootMargin: '100px' });
+        observer.observe(card);
+
     } else {
         media = document.createElement('img');
-        media.src = filename;
+        media.onload = () => card.classList.add('loaded');
+        media.onerror = () => {
+            card.classList.remove('loading');
+            card.classList.add('error');
+        };
         media.loading = 'lazy';
+        media.src = filename; // Set SRC after listeners
     }
 
     const info = document.createElement('div');
