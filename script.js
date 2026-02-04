@@ -8,10 +8,15 @@ const ASSET_DATA = {
         { file: 'FullConcept_Floorplan_LateralView.png', title: 'Lateral layout' }
     ],
     vision: [
-        'FullConcept00.png', 'FullConcept000.png', 'FullConcept01.png', 'FullConcept02.jpeg',
-        'FullConcept03.png', 'FullConcept04.png', 'FullConcept05.jpg', 'FullConcept05.png',
+        'FullConcept00.png', 'FullConcept000.png', 'FullConcept02.jpeg',
+        'FullConcept05.jpg', 'FullConcept05.png',
         'FullConcept06.jpg', 'FullConcept06.png', 'FullConcept07.png',
         'FullConcept07_Floorplan.png', 'FullConcept13.jpg', 'FullConcept14.jpg'
+    ],
+    lowerLevel: [
+        'LowerLevel01.png', 'LowerLevel2.mp4', 'FullConcept01.png',
+        'FullConcept03.png', 'FullConcept04.png', 'Pasillo03.jpg', 'Pasillo04.jpg',
+        'Master13.jpg'
     ],
     highlights: [
         'Best00.mp4', 'Best000.mp4', 'Best01.mp4', 'Best02.mp4', 'Best03.mp4',
@@ -45,11 +50,10 @@ const ASSET_DATA = {
         { file: 'Master05.jpg', category: 'Master Suite' }, { file: 'Master06.jpg', category: 'Master Suite' },
         { file: 'Master07.jpg', category: 'Master Suite' }, { file: 'Master08.jpg', category: 'Master Suite' },
         { file: 'Master10.jpg', category: 'Master Suite' }, { file: 'Master12.jpg', category: 'Master Suite' },
-        { file: 'Master13.jpg', category: 'Master Suite' }, { file: 'Master14.jpg', category: 'Master Suite' },
+        { file: 'Master14.jpg', category: 'Master Suite' },
         { file: 'Master15.jpg', category: 'Master Suite' }, { file: 'Master16.jpg', category: 'Master Suite' },
         { file: 'Master17.jpg', category: 'Master Suite' }, { file: 'Master18.jpg', category: 'Master Suite' },
         { file: 'Pasillo01.jpg', category: 'Flow' }, { file: 'Pasillo02.jpg', category: 'Flow' },
-        { file: 'Pasillo03.jpg', category: 'Flow' }, { file: 'Pasillo04.jpg', category: 'Flow' },
         { file: 'Pond01.jpg', category: 'Pool' }, { file: 'Pond02.jpg', category: 'Pool' },
         { file: 'Pool01.png', category: 'Pool' }, { file: 'Pool06.jpg', category: 'Pool' },
         { file: 'Pool07.jpg', category: 'Pool' }, { file: 'Pool13.jpg', category: 'Pool' },
@@ -74,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackground();
     renderLand();
     renderVision();
+    renderLowerLevel();
     renderHighlights();
     renderFilters();
     renderLibrary('all');
@@ -146,6 +151,15 @@ function renderVision() {
     const grid = document.getElementById('vision-grid');
     ASSET_DATA.vision.forEach((file, i) => {
         grid.appendChild(createCard(file, 'MASTER CONCEPT', i + 1));
+    });
+}
+
+function renderLowerLevel() {
+    const grid = document.getElementById('lower-level-grid');
+    ASSET_DATA.lowerLevel.forEach((file, i) => {
+        let title = 'LOWER LEVEL';
+        if (file === 'LowerLevel01.png') title = 'HOTEL PACAMARA';
+        grid.appendChild(createCard(file, title, i + 1));
     });
 }
 
