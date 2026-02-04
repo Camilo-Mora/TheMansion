@@ -14,7 +14,7 @@ const ASSET_DATA = {
         'FullConcept07_Floorplan.png', 'FullConcept13.jpg', 'FullConcept14.jpg'
     ],
     lowerLevel: [
-        'LowerLevel01.png', 'LowerLevel03.png', 'LowerLevel2.mp4', 'FullConcept01.png',
+        'LowerLevel00.png', 'LowerLevel01.png', 'LowerLevel03.png', 'LowerLevel2.mp4', 'FullConcept01.png',
         'FullConcept03.png', 'FullConcept04.png', 'Pasillo03.jpg', 'Pasillo04.jpg',
         'Master13.jpg'
     ],
