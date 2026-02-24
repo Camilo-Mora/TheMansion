@@ -335,6 +335,80 @@ section {
     letter-spacing: 2px;
 }
 
+
+/* ── DWG Avatar Card ─────────────────────────────────────────── */
+.dwg-card {
+    background: linear-gradient(135deg, #071828 0%, #0d2a4a 100%);
+    border: 1px solid rgba(58, 143, 216, 0.35);
+    cursor: default !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dwg-card:hover {
+    border-color: rgba(58, 143, 216, 0.7);
+    box-shadow: 0 0 24px rgba(58, 143, 216, 0.2);
+}
+
+.dwg-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.dwg-avatar svg {
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.3));
+}
+
+.dwg-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #64c8ff;
+    text-align: center;
+}
+
+.dwg-sub {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+    font-family: monospace;
+    text-align: center;
+}
+
+.dwg-download {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 7px 18px;
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+.dwg-download:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 16px rgba(209, 184, 148, 0.4);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     header h1 {

@@ -5,7 +5,7 @@ const ASSET_DATA = {
         { file: 'MountainProfile03.jpg', title: 'LAND CONTEXT' },
         { file: 'FullConcept_Topography.jpg', title: 'LAND CONTEXT' },
         { file: 'FullConcept_Floorplan_FrontView.png', title: 'Frontal layout' },
-        { file: 'FullConcept_Floorplan_LateralView.png', title: 'Lateral layout' }
+        { file: 'Buitrera_17Feb2026.dwg', title: 'DWG Drawing of Terrain', type: 'dwg' }
     ],
     vision: [
         'FullConcept00.png', 'FullConcept000.png', 'FullConcept02.jpeg',
@@ -178,12 +178,77 @@ function createCard(filename, title, index) {
     return card;
 }
 
+function createDwgCard(item, index) {
+    const card = document.createElement('div');
+    card.className = 'card loaded dwg-card';
+    card.style.cursor = 'default';
+
+    if (index !== undefined) {
+        const num = document.createElement('div');
+        num.className = 'card-number';
+        num.textContent = `#${index}`;
+        card.appendChild(num);
+    }
+
+    // Avatar body
+    const avatar = document.createElement('div');
+    avatar.className = 'dwg-avatar';
+    avatar.innerHTML = `
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Blueprint paper -->
+          <rect x="8" y="6" width="52" height="64" rx="4" fill="#0d2a4a" stroke="#3a8fd8" stroke-width="1.5"/>
+          <!-- Grid lines -->
+          <line x1="8" y1="22" x2="60" y2="22" stroke="#3a8fd8" stroke-width="0.5" stroke-opacity="0.5"/>
+          <line x1="8" y1="38" x2="60" y2="38" stroke="#3a8fd8" stroke-width="0.5" stroke-opacity="0.5"/>
+          <line x1="8" y1="54" x2="60" y2="54" stroke="#3a8fd8" stroke-width="0.5" stroke-opacity="0.5"/>
+          <line x1="24" y1="6" x2="24" y2="70" stroke="#3a8fd8" stroke-width="0.5" stroke-opacity="0.5"/>
+          <line x1="40" y1="6" x2="40" y2="70" stroke="#3a8fd8" stroke-width="0.5" stroke-opacity="0.5"/>
+          <!-- Terrain contour lines -->
+          <path d="M14 48 Q22 36 32 40 Q42 44 52 30" stroke="#64c8ff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M14 56 Q24 46 34 50 Q44 54 54 42" stroke="#64c8ff" stroke-width="1" fill="none" stroke-linecap="round" stroke-opacity="0.6"/>
+          <!-- North arrow -->
+          <polygon points="66,12 62,22 66,20 70,22" fill="#f0b429" stroke="#f0b429" stroke-width="0.5"/>
+          <line x1="66" y1="12" x2="66" y2="22" stroke="#f0b429" stroke-width="1.5"/>
+          <!-- DWG badge -->
+          <rect x="10" y="9" width="26" height="9" rx="2" fill="#1a6bb5"/>
+          <text x="23" y="17" text-anchor="middle" font-size="5.5" fill="white" font-family="monospace" font-weight="bold">DWG</text>
+        </svg>
+    `;
+
+    const label = document.createElement('div');
+    label.className = 'dwg-label';
+    label.textContent = item.title;
+
+    const sub = document.createElement('div');
+    sub.className = 'dwg-sub';
+    sub.textContent = item.file;
+
+    const link = document.createElement('a');
+    link.href = item.file;
+    link.download = item.file;
+    link.className = 'dwg-download';
+    link.textContent = '⬇ Download DWG';
+    link.addEventListener('click', e => e.stopPropagation());
+
+    avatar.appendChild(label);
+    avatar.appendChild(sub);
+    avatar.appendChild(link);
+    card.appendChild(avatar);
+
+    return card;
+}
+
 function renderLand() {
     const grid = document.getElementById('land-grid');
     ASSET_DATA.mountains.forEach((item, i) => {
-        grid.appendChild(createCard(item.file, item.title, i + 1));
+        if (item.type === 'dwg') {
+            grid.appendChild(createDwgCard(item, i + 1));
+        } else {
+            grid.appendChild(createCard(item.file, item.title, i + 1));
+        }
     });
 }
+
 
 function renderVision() {
     const grid = document.getElementById('vision-grid');
