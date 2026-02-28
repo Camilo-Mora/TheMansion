@@ -240,11 +240,13 @@ function createDwgCard(item, index) {
 
 function renderLand() {
     const grid = document.getElementById('land-grid');
-    ASSET_DATA.mountains.forEach((item, i) => {
+    let offset = 1;
+    ASSET_DATA.mountains.forEach((item) => {
+        let numStr = String(offset++).padStart(2, '0');
         if (item.type === 'dwg') {
-            grid.appendChild(createDwgCard(item, i + 1));
+            grid.appendChild(createDwgCard(item, numStr));
         } else {
-            grid.appendChild(createCard(item.file, item.title, i + 1));
+            grid.appendChild(createCard(item.file, item.title, numStr));
         }
     });
 }
@@ -252,24 +254,30 @@ function renderLand() {
 
 function renderVision() {
     const grid = document.getElementById('vision-grid');
-    ASSET_DATA.vision.forEach((file, i) => {
-        grid.appendChild(createCard(file, 'MASTER CONCEPT', i + 1));
+    let offset = ASSET_DATA.mountains.length + 1;
+    ASSET_DATA.vision.forEach((file) => {
+        let numStr = String(offset++).padStart(2, '0');
+        grid.appendChild(createCard(file, 'MASTER CONCEPT', numStr));
     });
 }
 
 function renderLowerLevel() {
     const grid = document.getElementById('lower-level-grid');
-    ASSET_DATA.lowerLevel.forEach((file, i) => {
+    let offset = ASSET_DATA.mountains.length + ASSET_DATA.vision.length + 1;
+    ASSET_DATA.lowerLevel.forEach((file) => {
         let title = 'LOWER LEVEL';
         if (file === 'LowerLevel01.png') title = 'HOTEL PACAMARA';
-        grid.appendChild(createCard(file, title, i + 1));
+        let numStr = String(offset++).padStart(2, '0');
+        grid.appendChild(createCard(file, title, numStr));
     });
 }
 
 function renderHighlights() {
     const grid = document.getElementById('highlights-grid');
-    ASSET_DATA.highlights.forEach((file, i) => {
-        grid.appendChild(createCard(file, 'PREVIEW', i + 1));
+    let offset = ASSET_DATA.mountains.length + ASSET_DATA.vision.length + ASSET_DATA.lowerLevel.length + 1;
+    ASSET_DATA.highlights.forEach((file) => {
+        let numStr = String(offset++).padStart(2, '0');
+        grid.appendChild(createCard(file, 'PREVIEW', numStr));
     });
 }
 
@@ -301,6 +309,8 @@ function renderLibrary(filter) {
     const grid = document.getElementById('library-grid');
     grid.innerHTML = '';
 
+    let offset = ASSET_DATA.mountains.length + ASSET_DATA.vision.length + ASSET_DATA.lowerLevel.length + ASSET_DATA.highlights.length + 1;
+
     if (filter === 'all') {
         const categories = [...new Set(ASSET_DATA.library.map(item => item.category))];
         categories.forEach(cat => {
@@ -312,14 +322,16 @@ function renderLibrary(filter) {
 
             // Add items in that category
             const items = ASSET_DATA.library.filter(i => i.category === cat);
-            items.forEach((item, i) => {
-                grid.appendChild(createCard(item.file, item.category, i + 1));
+            items.forEach((item) => {
+                let numStr = String(offset++).padStart(2, '0');
+                grid.appendChild(createCard(item.file, item.category, numStr));
             });
         });
     } else {
         const items = ASSET_DATA.library.filter(i => i.category === filter);
-        items.forEach((item, i) => {
-            grid.appendChild(createCard(item.file, item.category, i + 1));
+        items.forEach((item) => {
+            let numStr = String(offset++).padStart(2, '0');
+            grid.appendChild(createCard(item.file, item.category, numStr));
         });
     }
 }
