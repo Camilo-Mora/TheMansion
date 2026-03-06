@@ -13,87 +13,80 @@
     <div id="global-bg"></div>
     <div id="global-overlay"></div>
 
-    <nav>
-        <div class="logo">THE MANSION</div>
-        <div class="nav-links">
-            <a href="#vision">THE VISION</a>
-            <a href="#lower-level">LOWER LEVEL</a>
-            <a href="#library">REFERENCE LIBRARY</a>
-            <a href="#highlights">HIGHLIGHTS</a>
-        </div>
-    </nav>
 
-    <header>
-        <p>Architectural Concept</p>
-        <h1>THE MANSION</h1>
-        <div class="divider" style="width: 100px; height: 1px; background: var(--accent-color); margin: 30px auto;">
+
+    <header id="interactive-map">
+        <div class="map-controls">
+            <button id="toggle-map-nodes" class="btn-map"><span class="icon">👁️</span> <span class="text">Hide
+                    Nodes</span></button>
+            <button id="toggle-map-lock" class="btn-map"><span class="icon">🔒</span> <span class="text">Map
+                    Locked</span></button>
+            <button id="btn-site-imagery" class="btn-map"><span class="icon">🖼️</span> <span class="text">Site
+                    imagery</span></button>
+            <button id="btn-topography" class="btn-map"><span class="icon">�</span> <span class="text">Topography
+                    file</span></button>
+            <button id="btn-integrated-concepts" class="btn-map"><span class="icon">💡</span> <span
+                    class="text">Integrated concepts</span></button>
+            <div class="search-box">
+                <span class="search-icon">#</span>
+                <input type="text" id="asset-search" placeholder="GOTO ID (001...)" maxlength="3">
+            </div>
+            <button id="export-map-positions" class="btn-map" style="display: none;">⬇ Copy Node Data</button>
+        </div>
+
+        <div id="node-edit-panel" class="node-edit-panel" style="display: none;">
+            <h4>Edit Node: <span id="edit-node-title"></span></h4>
+            <div class="edit-group">
+                <label>Pos X:</label><input type="number" id="edit-node-x">
+            </div>
+            <div class="edit-group">
+                <label>Pos Y:</label><input type="number" id="edit-node-y">
+            </div>
+            <div class="edit-group">
+                <label>Width:</label><input type="number" id="edit-node-width">
+            </div>
+            <div class="edit-group">
+                <label>Height:</label><input type="number" id="edit-node-height">
+            </div>
+            <div class="edit-group">
+                <label>Letter Size:</label><input type="number" id="edit-node-font">
+            </div>
+        </div>
+
+        <div id="map-container" class="map-container">
+            <!-- Map rendered via JS -->
         </div>
     </header>
 
-    <!-- Land Section -->
-    <section id="land">
-        <div class="section-head">
-            <h2>Land to build in</h2>
-            <div class="divider"></div>
-            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Establishing the context: The
-                mountain terrain designated for the project.</p>
-        </div>
-        <div class="grid" id="land-grid">
-            <!-- Dynamically Populated -->
-        </div>
-    </section>
 
-    <!-- Master Vision Section -->
-    <section id="vision">
-        <div class="section-head">
-            <h2>Master Concepts</h2>
-            <div class="divider"></div>
-            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">The core architectural blueprints
-                and full-scale visualizations of the final structure.</p>
-        </div>
-        <div class="grid" id="vision-grid">
-            <!-- Dynamically Populated -->
-        </div>
-    </section>
 
-    <!-- Lower Level Section -->
-    <section id="lower-level">
+    <!-- Project Gallery Section -->
+    <section id="gallery-section">
         <div class="section-head">
-            <h2>LOWER LEVEL</h2>
-            <div class="divider"></div>
-            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Lower Level architectural
-                concepts and details.</p>
-        </div>
-        <div class="grid" id="lower-level-grid">
-            <!-- Dynamically Populated -->
-        </div>
-    </section>
-
-    <!-- Cinematic Highlights Section -->
-    <section id="highlights" style="background: rgba(255,255,255,0.02);">
-        <div class="section-head">
-            <h2>Cinematic Highlights</h2>
-            <div class="divider"></div>
-        </div>
-        <div class="grid" id="highlights-grid">
-            <!-- Dynamically Populated -->
-        </div>
-    </section>
-
-    <!-- Reference Library Section -->
-    <section id="library">
-        <div class="section-head">
-            <h2>Reference Library</h2>
+            <h2>Project Details</h2>
             <div class="divider"></div>
             <div class="filters" id="category-filters">
-                <button class="filter-btn active" data-category="all">All References</button>
-                <!-- Categories will be added here -->
+                <button class="filter-btn active" data-category="all">All Details</button>
             </div>
         </div>
-        <div class="grid" id="library-grid">
+        <div class="grid" id="main-grid">
             <!-- Dynamically Populated -->
         </div>
+        <div class="back-to-map"><a href="#interactive-map" class="btn-back-map">↑ Back to Spatial Map</a></div>
     </section>
+
+    <!-- Topography Modal -->
+    <div id="topography-modal" class="modal">
+        <div class="modal-content">
+            <div id="modal-close">&times;</div>
+            <h3>Download Topography</h3>
+            <p>Download the topography of the site, a DWG file.</p>
+            <div style="margin-top: 30px;">
+                <a href="Buitrera_17Feb2026.dwg" download class="btn-back-map"
+                    style="background: var(--accent-color); color: var(--bg-color);">Download DWG</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Lightbox -->
     <div id="lightbox">
