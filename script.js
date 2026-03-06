@@ -497,10 +497,23 @@ function initMap() {
         topoModal.style.display = 'none';
     });
 
-    // Close modal on outside click
+    // Project Description Modal
+    const descModal = document.getElementById('description-modal');
+    document.getElementById('btn-project-description').addEventListener('click', () => {
+        descModal.style.display = 'flex';
+    });
+
+    document.getElementById('description-modal-close').addEventListener('click', () => {
+        descModal.style.display = 'none';
+    });
+
+    // Close modals on outside click
     window.addEventListener('click', (e) => {
         if (e.target === topoModal) {
             topoModal.style.display = 'none';
+        }
+        if (e.target === descModal) {
+            descModal.style.display = 'none';
         }
     });
 

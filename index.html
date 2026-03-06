@@ -15,8 +15,12 @@
 
 
 
+    <div id="project-title">Minimalist Ridge House</div>
+
     <header id="interactive-map">
         <div class="map-controls">
+            <button id="btn-project-description" class="btn-map"><span class="icon">📜</span> <span class="text">Project
+                    Vision</span></button>
             <button id="toggle-map-nodes" class="btn-map"><span class="icon">👁️</span> <span class="text">Hide
                     Nodes</span></button>
             <button id="toggle-map-lock" class="btn-map"><span class="icon">🔒</span> <span class="text">Map
@@ -78,12 +82,42 @@
     <!-- Topography Modal -->
     <div id="topography-modal" class="modal">
         <div class="modal-content">
-            <div id="modal-close">&times;</div>
+            <div id="modal-close" class="close-btn">&times;</div>
             <h3>Download Topography</h3>
             <p>Download the topography of the site, a DWG file.</p>
             <div style="margin-top: 30px;">
                 <a href="Buitrera_17Feb2026.dwg" download class="btn-back-map"
                     style="background: var(--accent-color); color: var(--bg-color);">Download DWG</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Description Modal -->
+    <div id="description-modal" class="modal">
+        <div class="modal-content description-modal-content">
+            <div id="description-modal-close" class="close-btn">&times;</div>
+            <h2 class="modal-title">Project Vision</h2>
+            <div class="divider"></div>
+            <div class="description-body">
+                <p><strong>Architectural Concept</strong> Designed linearly along a mountain ridge, this residence is a
+                    study in landscape integration. The structure follows the natural contours of the terrain, blurring
+                    the line between the built environment and the rugged mountain profile.</p>
+
+                <p><strong>Ground Level | Social Core</strong> The heart of the home is a central core housing the
+                    kitchen and living room, designed for fluid transition. It extends out to a panoramic lookout
+                    platform on one side and an expansive pool area on the other. This level also accommodates a private
+                    bedroom and a dedicated office for a balanced live-work experience.</p>
+
+                <p><strong>Lower Level | Secluded Retreat</strong> Carved into the mountain slope, the lower level is
+                    partially subterranean, offering natural thermal insulation and privacy. It features two additional
+                    bedrooms and a media lounge integrated directly into the terrain.</p>
+
+                <p><strong>Outdoor Living</strong> The design is completed by a series of outdoor tiered spaces,
+                    including a pool with an integrated tub and a dedicated BBQ area, all positioned to capture the
+                    essence of the surrounding landscape.</p>
+
+                <p class="mission-statement">The goal of this portfolio is to provide a spatial map of the design
+                    intent, serving as the blueprint for a high-end cinematic architectural visualization.</p>
             </div>
         </div>
     </div>
