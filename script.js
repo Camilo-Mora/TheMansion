@@ -9,7 +9,7 @@ const ASSET_DATA = [
     { file: '064_BBQ01.jpg', category: 'BBQ' }, { file: '065_BBQ02.jpg', category: 'BBQ' }, { file: '066_BBQ04.jpg', category: 'BBQ' }, { file: '067_BBQ06.jpg', category: 'BBQ' }, { file: '068_BBQ07.jpg', category: 'BBQ' }, { file: '069_BBQ08.jpg', category: 'BBQ' }, { file: '070_BBQ09.jpg', category: 'BBQ' }, { file: '071_BBQ10.mp4', category: 'BBQ' },
     { file: '072_Kitchen_01.jpg', category: 'Kitchen' }, { file: '073_Kitchen_02.jpg', category: 'Kitchen' }, { file: '074_Kitchen_03.jpg', category: 'Kitchen' }, { file: '075_Kitchen_04.jpg', category: 'Kitchen' }, { file: '076_Kitchen_05.jpg', category: 'Kitchen' },
     { file: '077_Garden_01.jpg', category: 'Garden' }, { file: '078_Garden_02.jpg', category: 'Garden' }, { file: '079_Garden_03.mp4', category: 'Garden' },
-    { file: '080_SiteImagery_01.jpg', category: 'SiteImagery' }, { file: '081_SiteImagery_02.png', category: 'SiteImagery' }, { file: '082_SiteImagery_03.jpg', category: 'SiteImagery' },
+    { file: '080_SiteImagery_01.jpg', category: 'SiteImagery' }, { file: '080a_SiteImagery_00.png', category: 'SiteImagery' }, { file: '080b_SiteImagery_00.png', category: 'SiteImagery', pdf: '080b_SiteImagery_00.pdf' }, { file: '080c_SiteImagery_00.tif', category: 'SiteImagery' }, { file: '081_SiteImagery_02.png', category: 'SiteImagery' }, { file: '082_SiteImagery_03.jpg', category: 'SiteImagery' },
     { file: '083_IntegratedConcept_00.jpg', category: 'IntegratedConcept' }, { file: '084_IntegratedConcept_01.jpeg', category: 'IntegratedConcept' }, { file: '085_IntegratedConcept_02.jpg', category: 'IntegratedConcept' }, { file: '086_IntegratedConcept_03.png', category: 'IntegratedConcept' }, { file: '087_IntegratedConcept_04.jpeg', category: 'IntegratedConcept' }, { file: '088_IntegratedConcept_05.png', category: 'IntegratedConcept' }, { file: '089_IntegratedConcept_06.png', category: 'IntegratedConcept' }, { file: '090_IntegratedConcept_07.png', category: 'IntegratedConcept' }, { file: '091_IntegratedConcept_08.mp4', category: 'IntegratedConcept' }, { file: '092_IntegratedConcept_09.mp4', category: 'IntegratedConcept' }, { file: '093_IntegratedConcept_10.mp4', category: 'IntegratedConcept' }, { file: '094_IntegratedConcept_11.mp4', category: 'IntegratedConcept' }, { file: '095_IntegratedConcept_12.mp4', category: 'IntegratedConcept' }, { file: '096_IntegratedConcept_13.mp4', category: 'IntegratedConcept' }
 ];
 
@@ -25,7 +25,7 @@ function isVideo(filename) {
 }
 
 
-function createCard(filename, title, index) {
+function createCard(filename, title, index, pdfFile) {
     const card = document.createElement('div');
     card.className = 'card loading';
 
@@ -88,6 +88,16 @@ function createCard(filename, title, index) {
     info.className = 'card-info';
     info.innerHTML = `<h3>${title || filename.split('.')[0]}</h3>`;
 
+    if (pdfFile) {
+        const pdfLink = document.createElement('a');
+        pdfLink.href = pdfFile;
+        pdfLink.textContent = 'Get PDF';
+        pdfLink.download = pdfFile;
+        pdfLink.className = 'pdf-download';
+        pdfLink.addEventListener('click', (e) => e.stopPropagation());
+        info.appendChild(pdfLink);
+    }
+
     card.appendChild(media);
     card.appendChild(info);
 
@@ -96,7 +106,7 @@ function createCard(filename, title, index) {
     return card;
 }
 
-function createDwgCard(item, index) {
+function createDocCard(item, typeUpper, index) {
     const card = document.createElement('div');
     card.className = 'card loaded dwg-card';
     card.style.cursor = 'default';
@@ -127,15 +137,15 @@ function createDwgCard(item, index) {
           <!-- North arrow -->
           <polygon points="66,12 62,22 66,20 70,22" fill="#f0b429" stroke="#f0b429" stroke-width="0.5"/>
           <line x1="66" y1="12" x2="66" y2="22" stroke="#f0b429" stroke-width="1.5"/>
-          <!-- DWG badge -->
-          <rect x="10" y="9" width="26" height="9" rx="2" fill="#1a6bb5"/>
-          <text x="23" y="17" text-anchor="middle" font-size="5.5" fill="white" font-family="monospace" font-weight="bold">DWG</text>
+          <!-- Badge -->
+          <rect x="10" y="9" width="30" height="9" rx="2" fill="#1a6bb5"/>
+          <text x="25" y="17" text-anchor="middle" font-size="5.5" fill="white" font-family="monospace" font-weight="bold">${typeUpper}</text>
         </svg>
     `;
 
     const label = document.createElement('div');
     label.className = 'dwg-label';
-    label.textContent = item.title;
+    label.textContent = item.category || 'Document';
 
     const sub = document.createElement('div');
     sub.className = 'dwg-sub';
@@ -145,7 +155,7 @@ function createDwgCard(item, index) {
     link.href = item.file;
     link.download = item.file;
     link.className = 'dwg-download';
-    link.textContent = '⬇ Download DWG';
+    link.textContent = `⬇ Download ${typeUpper}`;
     link.addEventListener('click', e => e.stopPropagation());
 
     avatar.appendChild(label);
@@ -188,7 +198,17 @@ function renderGallery(filterCategory = 'all') {
         const prefix = item.file.match(/^\d{3}[a-z]?/i);
         const displayNum = prefix ? prefix[0] : '';
 
-        const card = createCard(item.file, item.category, displayNum);
+        const fileNameLower = item.file.toLowerCase();
+        let card;
+        
+        if (fileNameLower.endsWith('.tif') || fileNameLower.endsWith('.tiff')) {
+            card = createDocCard(item, 'TIF', displayNum);
+        } else if (fileNameLower.endsWith('.dwg')) {
+            card = createDocCard(item, 'DWG', displayNum);
+        } else {
+            card = createCard(item.file, item.category, displayNum, item.pdf);
+        }
+        
         grid.appendChild(card);
     });
 }
