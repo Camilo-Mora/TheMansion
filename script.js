@@ -10,7 +10,8 @@ const ASSET_DATA = [
     { file: '072_Kitchen_01.jpg', category: 'Kitchen' }, { file: '073_Kitchen_02.jpg', category: 'Kitchen' }, { file: '074_Kitchen_03.jpg', category: 'Kitchen' }, { file: '075_Kitchen_04.jpg', category: 'Kitchen' }, { file: '076_Kitchen_05.jpg', category: 'Kitchen' },
     { file: '077_Garden_01.jpg', category: 'Garden' }, { file: '078_Garden_02.jpg', category: 'Garden' }, { file: '079_Garden_03.mp4', category: 'Garden' },
     { file: '080_SiteImagery_01.jpg', category: 'SiteImagery' }, { file: '080a_SiteImagery_00.png', category: 'SiteImagery' }, { file: '080b_SiteImagery_00.png', category: 'SiteImagery', pdf: '080b_SiteImagery_00.pdf' }, { file: '080c_SiteImagery_00.tif', category: 'SiteImagery' }, { file: '081_SiteImagery_02.png', category: 'SiteImagery' }, { file: '082_SiteImagery_03.jpg', category: 'SiteImagery' },
-    { file: '083_IntegratedConcept_00.jpg', category: 'IntegratedConcept' }, { file: '084_IntegratedConcept_01.jpeg', category: 'IntegratedConcept' }, { file: '085_IntegratedConcept_02.jpg', category: 'IntegratedConcept' }, { file: '086_IntegratedConcept_03.png', category: 'IntegratedConcept' }, { file: '087_IntegratedConcept_04.jpeg', category: 'IntegratedConcept' }, { file: '088_IntegratedConcept_05.png', category: 'IntegratedConcept' }, { file: '089_IntegratedConcept_06.png', category: 'IntegratedConcept' }, { file: '090_IntegratedConcept_07.png', category: 'IntegratedConcept' }, { file: '091_IntegratedConcept_08.mp4', category: 'IntegratedConcept' }, { file: '092_IntegratedConcept_09.mp4', category: 'IntegratedConcept' }, { file: '093_IntegratedConcept_10.mp4', category: 'IntegratedConcept' }, { file: '094_IntegratedConcept_11.mp4', category: 'IntegratedConcept' }, { file: '095_IntegratedConcept_12.mp4', category: 'IntegratedConcept' }, { file: '096_IntegratedConcept_13.mp4', category: 'IntegratedConcept' }
+    { file: '083_IntegratedConcept_00.jpg', category: 'IntegratedConcept' }, { file: '084_IntegratedConcept_01.jpeg', category: 'IntegratedConcept' }, { file: '085_IntegratedConcept_02.jpg', category: 'IntegratedConcept' }, { file: '086_IntegratedConcept_03.png', category: 'IntegratedConcept' }, { file: '087_IntegratedConcept_04.jpeg', category: 'IntegratedConcept' }, { file: '088_IntegratedConcept_05.png', category: 'IntegratedConcept' }, { file: '089_IntegratedConcept_06.png', category: 'IntegratedConcept' }, { file: '090_IntegratedConcept_07.png', category: 'IntegratedConcept' }, { file: '091_IntegratedConcept_08.mp4', category: 'IntegratedConcept' }, { file: '092_IntegratedConcept_09.mp4', category: 'IntegratedConcept' }, { file: '093_IntegratedConcept_10.mp4', category: 'IntegratedConcept' }, { file: '094_IntegratedConcept_11.mp4', category: 'IntegratedConcept' }, { file: '095_IntegratedConcept_12.mp4', category: 'IntegratedConcept' }, { file: '096_IntegratedConcept_13.mp4', category: 'IntegratedConcept' },
+    { file: '100_Parking_01.png', category: 'Parking' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -269,7 +270,8 @@ const mapNodes = [
     { id: 'shower', title: 'Shower', x: 477, y: 372, width: 110, height: 11, fontSize: 13, color: '#d1b894', target: 'Core Area' },
     { id: 'storage', title: 'Storage', x: 476, y: 398, width: 110, height: 11, fontSize: 13, color: '#d1b894', target: 'Core Area' },
     { id: 'room3', title: 'Room3', x: 308, y: 464, width: 100, height: 20, fontSize: 15, color: '#e69b27', target: 'Room3' },
-    { id: 'garden', title: 'Garden', x: 763, y: 397, width: 70, height: 10, fontSize: 11, color: '#2ecc71', target: 'Garden' }
+    { id: 'garden', title: 'Garden', x: 747, y: 387, width: 70, height: 10, fontSize: 11, color: '#2ecc71', target: 'Garden' },
+    { id: 'parking', title: 'Parking', x: 778, y: 409, width: 70, height: 10, fontSize: 11, color: '#e69b27', target: 'Parking' }
 ];
 
 // Optional: you can add explicit line connections here if you still want them. 
