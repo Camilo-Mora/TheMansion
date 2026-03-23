@@ -1,6 +1,6 @@
 const ASSET_DATA = [
     { file: '001_Living_00.png', category: 'Living' }, { file: '002_Living_01.mp4', category: 'Living' }, { file: '003_Living_02.png', category: 'Living' }, { file: '004_Living_03.jpg', category: 'Living' }, { file: '005_Living_04.jpg', category: 'Living' }, { file: '006_Living_05.jpg', category: 'Living' }, { file: '007_Living_06.jpg', category: 'Living' },
-    { file: '008_Room1_01.png', category: 'Room1' }, { file: '009_Room1_02.jpg', category: 'Room1' }, { file: '010_Room1_03.jpg', category: 'Room1' }, { file: '011_Room1_04.jpg', category: 'Room1' }, { file: '012_Room1_05.jpg', category: 'Room1' }, { file: '013_Room1_06.jpg', category: 'Room1' }, { file: '014_Room1_07.jpg', category: 'Room1' }, { file: '015_Room1_08.jpg', category: 'Room1' }, { file: '016_Room1_10.png', category: 'Room1' },
+    { file: '008_Room1_01.png', category: 'Room1' }, { file: '009_Room1_02.jpg', category: 'Room1' }, { file: '010_Room1_03.jpg', category: 'Room1' }, { file: '010a_Room1_01.mp4', category: 'Room1' }, { file: '011_Room1_04.jpg', category: 'Room1' }, { file: '012_Room1_05.jpg', category: 'Room1' }, { file: '013_Room1_06.jpg', category: 'Room1' }, { file: '014_Room1_07.jpg', category: 'Room1' }, { file: '015_Room1_08.jpg', category: 'Room1' }, { file: '016_Room1_10.png', category: 'Room1' },
     { file: '017_Room2_01.png', category: 'Room2' }, { file: '018_Room2_02.jpg', category: 'Room2' }, { file: '019_Room2_03.jpg', category: 'Room2' }, { file: '020_Room2_04.jpg', category: 'Room2' }, { file: '021_Room2_05.jpg', category: 'Room2' }, { file: '022_Room2_06.jpg', category: 'Room2' },
     { file: '023_Room3_00.jpg', category: 'Room3' }, { file: '024_Room3_01.mp4', category: 'Room3' }, { file: '025_Room3_02.jpg', category: 'Room3' }, { file: '026_Room3_03.jpg', category: 'Room3' }, { file: '027_Room3_04.png', category: 'Room3' }, { file: '028_Room3_05.jpg', category: 'Room3' }, { file: '029_Room3_06.jpg', category: 'Room3' }, { file: '030_Room3_07.jpg', category: 'Room3' },
     { file: '031_Lookout_01.jpg', category: 'Lookout' }, { file: '032_Lookout_02.jpg', category: 'Lookout' }, { file: '033_Lookout_03.jpg', category: 'Lookout' }, { file: '034_Lookout_04.jpg', category: 'Lookout' }, { file: '035_Lookout_05.jpg', category: 'Lookout' }, { file: '036_Lookout_06.jpg', category: 'Lookout' }, { file: '037_Lookout_07.jpg', category: 'Lookout' }, { file: '038_Lookout_08.jpg', category: 'Lookout' }, { file: '039_Lookout_09.png', category: 'Lookout' }, { file: '040_Lookout_10.png', category: 'Lookout' }, { file: '041_Lookout_11.jpg', category: 'Lookout' }, { file: '042_Lookout_12.jpg', category: 'Lookout' }, { file: '043_Lookout_13.jpg', category: 'Lookout' }, { file: '044_Lookout_14.jpg', category: 'Lookout' }, { file: '045_Lookout_15.png', category: 'Lookout' },
@@ -9,8 +9,9 @@ const ASSET_DATA = [
     { file: '064_BBQ01.jpg', category: 'BBQ' }, { file: '065_BBQ02.jpg', category: 'BBQ' }, { file: '066_BBQ04.jpg', category: 'BBQ' }, { file: '067_BBQ06.jpg', category: 'BBQ' }, { file: '068_BBQ07.jpg', category: 'BBQ' }, { file: '069_BBQ08.jpg', category: 'BBQ' }, { file: '070_BBQ09.jpg', category: 'BBQ' }, { file: '071_BBQ10.mp4', category: 'BBQ' },
     { file: '072_Kitchen_01.jpg', category: 'Kitchen' }, { file: '073_Kitchen_02.jpg', category: 'Kitchen' }, { file: '074_Kitchen_03.jpg', category: 'Kitchen' }, { file: '075_Kitchen_04.jpg', category: 'Kitchen' }, { file: '076_Kitchen_05.jpg', category: 'Kitchen' },
     { file: '077_Garden_01.jpg', category: 'Garden' }, { file: '078_Garden_02.jpg', category: 'Garden' }, { file: '079_Garden_03.mp4', category: 'Garden' },
-    { file: '080_SiteImagery_01.jpg', category: 'SiteImagery' }, { file: '081_SiteImagery_02.png', category: 'SiteImagery' }, { file: '082_SiteImagery_03.jpg', category: 'SiteImagery' },
-    { file: '083_IntegratedConcept_00.jpg', category: 'IntegratedConcept' }, { file: '084_IntegratedConcept_01.jpeg', category: 'IntegratedConcept' }, { file: '085_IntegratedConcept_02.jpg', category: 'IntegratedConcept' }, { file: '086_IntegratedConcept_03.png', category: 'IntegratedConcept' }, { file: '087_IntegratedConcept_04.jpeg', category: 'IntegratedConcept' }, { file: '088_IntegratedConcept_05.png', category: 'IntegratedConcept' }, { file: '089_IntegratedConcept_06.png', category: 'IntegratedConcept' }, { file: '090_IntegratedConcept_07.png', category: 'IntegratedConcept' }, { file: '091_IntegratedConcept_08.mp4', category: 'IntegratedConcept' }, { file: '092_IntegratedConcept_09.mp4', category: 'IntegratedConcept' }, { file: '093_IntegratedConcept_10.mp4', category: 'IntegratedConcept' }, { file: '094_IntegratedConcept_11.mp4', category: 'IntegratedConcept' }, { file: '095_IntegratedConcept_12.mp4', category: 'IntegratedConcept' }, { file: '096_IntegratedConcept_13.mp4', category: 'IntegratedConcept' }
+    { file: '080_SiteImagery_01.jpg', category: 'SiteImagery' }, { file: '080a_SiteImagery_00.png', category: 'SiteImagery' }, { file: '080b_SiteImagery_00.png', category: 'SiteImagery', pdf: '080b_SiteImagery_00.pdf' }, { file: '080c_SiteImagery_00.tif', category: 'SiteImagery' }, { file: '081_SiteImagery_02.png', category: 'SiteImagery' }, { file: '082_SiteImagery_03.jpg', category: 'SiteImagery' },
+    { file: '083_IntegratedConcept_00.jpg', category: 'IntegratedConcept' }, { file: '084_IntegratedConcept_01.jpeg', category: 'IntegratedConcept' }, { file: '085_IntegratedConcept_02.jpg', category: 'IntegratedConcept' }, { file: '086_IntegratedConcept_03.png', category: 'IntegratedConcept' }, { file: '087_IntegratedConcept_04.jpeg', category: 'IntegratedConcept' }, { file: '088_IntegratedConcept_05.png', category: 'IntegratedConcept' }, { file: '089_IntegratedConcept_06.png', category: 'IntegratedConcept' }, { file: '090_IntegratedConcept_07.png', category: 'IntegratedConcept' }, { file: '091_IntegratedConcept_08.mp4', category: 'IntegratedConcept' }, { file: '092_IntegratedConcept_09.mp4', category: 'IntegratedConcept' }, { file: '093_IntegratedConcept_10.mp4', category: 'IntegratedConcept' }, { file: '094_IntegratedConcept_11.mp4', category: 'IntegratedConcept' }, { file: '095_IntegratedConcept_12.mp4', category: 'IntegratedConcept' }, { file: '096_IntegratedConcept_13.mp4', category: 'IntegratedConcept' },
+    { file: '100_Parking_01.png', category: 'Parking' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,7 +26,7 @@ function isVideo(filename) {
 }
 
 
-function createCard(filename, title, index) {
+function createCard(filename, title, index, pdfFile) {
     const card = document.createElement('div');
     card.className = 'card loading';
 
@@ -88,6 +89,16 @@ function createCard(filename, title, index) {
     info.className = 'card-info';
     info.innerHTML = `<h3>${title || filename.split('.')[0]}</h3>`;
 
+    if (pdfFile) {
+        const pdfLink = document.createElement('a');
+        pdfLink.href = pdfFile;
+        pdfLink.textContent = 'Get PDF';
+        pdfLink.download = pdfFile;
+        pdfLink.className = 'pdf-download';
+        pdfLink.addEventListener('click', (e) => e.stopPropagation());
+        info.appendChild(pdfLink);
+    }
+
     card.appendChild(media);
     card.appendChild(info);
 
@@ -96,7 +107,7 @@ function createCard(filename, title, index) {
     return card;
 }
 
-function createDwgCard(item, index) {
+function createDocCard(item, typeUpper, index) {
     const card = document.createElement('div');
     card.className = 'card loaded dwg-card';
     card.style.cursor = 'default';
@@ -127,15 +138,15 @@ function createDwgCard(item, index) {
           <!-- North arrow -->
           <polygon points="66,12 62,22 66,20 70,22" fill="#f0b429" stroke="#f0b429" stroke-width="0.5"/>
           <line x1="66" y1="12" x2="66" y2="22" stroke="#f0b429" stroke-width="1.5"/>
-          <!-- DWG badge -->
-          <rect x="10" y="9" width="26" height="9" rx="2" fill="#1a6bb5"/>
-          <text x="23" y="17" text-anchor="middle" font-size="5.5" fill="white" font-family="monospace" font-weight="bold">DWG</text>
+          <!-- Badge -->
+          <rect x="10" y="9" width="30" height="9" rx="2" fill="#1a6bb5"/>
+          <text x="25" y="17" text-anchor="middle" font-size="5.5" fill="white" font-family="monospace" font-weight="bold">${typeUpper}</text>
         </svg>
     `;
 
     const label = document.createElement('div');
     label.className = 'dwg-label';
-    label.textContent = item.title;
+    label.textContent = item.category || 'Document';
 
     const sub = document.createElement('div');
     sub.className = 'dwg-sub';
@@ -145,7 +156,7 @@ function createDwgCard(item, index) {
     link.href = item.file;
     link.download = item.file;
     link.className = 'dwg-download';
-    link.textContent = '⬇ Download DWG';
+    link.textContent = `⬇ Download ${typeUpper}`;
     link.addEventListener('click', e => e.stopPropagation());
 
     avatar.appendChild(label);
@@ -188,7 +199,17 @@ function renderGallery(filterCategory = 'all') {
         const prefix = item.file.match(/^\d{3}[a-z]?/i);
         const displayNum = prefix ? prefix[0] : '';
 
-        const card = createCard(item.file, item.category, displayNum);
+        const fileNameLower = item.file.toLowerCase();
+        let card;
+        
+        if (fileNameLower.endsWith('.tif') || fileNameLower.endsWith('.tiff')) {
+            card = createDocCard(item, 'TIF', displayNum);
+        } else if (fileNameLower.endsWith('.dwg')) {
+            card = createDocCard(item, 'DWG', displayNum);
+        } else {
+            card = createCard(item.file, item.category, displayNum, item.pdf);
+        }
+        
         grid.appendChild(card);
     });
 }
@@ -239,9 +260,9 @@ let activeEditNode = null;
 
 const mapNodes = [
     { id: 'living', title: 'Living', x: 934, y: 464, group: 'core', width: 90, height: 20, fontSize: 15, color: '#e69b27', target: 'Living' },
-    { id: 'room1', title: 'Room1', x: 849, y: 464, group: 'core', width: 100, height: 20, fontSize: 15, color: '#e69b27', target: 'Room1' },
-    { id: 'room2', title: 'Room2', x: 1006, y: 445, group: 'core', width: 100, height: 20, fontSize: 15, color: '#e69b27', target: 'Room2' },
-    { id: 'lookout', title: 'Lookout', x: 951, y: 396, width: 90, height: 10, fontSize: 12, color: '#e69b27', target: 'Lookout' },
+    { id: 'room1', title: 'Room1', x: 1006, y: 435, group: 'core', width: 100, height: 20, fontSize: 15, color: '#e69b27', target: 'Room1' },
+    { id: 'room2', title: 'Room2', x: 845, y: 467, group: 'core', width: 100, height: 20, fontSize: 15, color: '#e69b27', target: 'Room2' },
+    { id: 'lookout', title: 'Lookout', x: 958, y: 397, width: 90, height: 10, fontSize: 12, color: '#e69b27', target: 'Lookout' },
     { id: 'corearea', title: 'Core area', x: 874, y: 388, group: 'core', width: 120, height: 20, fontSize: 18, color: '#e69b27', target: 'Core Area' },
     { id: 'pool', title: 'Pool', x: 647, y: 388, width: 120, height: 20, fontSize: 18, color: '#4a90e2', target: 'Pool' },
     { id: 'bbq', title: 'BBQ', x: 554, y: 388, width: 100, height: 20, fontSize: 18, color: '#e69b27', target: 'BBQ' },
@@ -249,7 +270,8 @@ const mapNodes = [
     { id: 'shower', title: 'Shower', x: 477, y: 372, width: 110, height: 11, fontSize: 13, color: '#d1b894', target: 'Core Area' },
     { id: 'storage', title: 'Storage', x: 476, y: 398, width: 110, height: 11, fontSize: 13, color: '#d1b894', target: 'Core Area' },
     { id: 'room3', title: 'Room3', x: 308, y: 464, width: 100, height: 20, fontSize: 15, color: '#e69b27', target: 'Room3' },
-    { id: 'garden', title: 'Garden', x: 763, y: 397, width: 70, height: 10, fontSize: 11, color: '#2ecc71', target: 'Garden' }
+    { id: 'garden', title: 'Garden', x: 747, y: 387, width: 70, height: 10, fontSize: 11, color: '#2ecc71', target: 'Garden' },
+    { id: 'parking', title: 'Parking', x: 778, y: 409, width: 70, height: 10, fontSize: 11, color: '#e69b27', target: 'Parking' }
 ];
 
 // Optional: you can add explicit line connections here if you still want them. 
