@@ -519,6 +519,51 @@ function initMap() {
         topoModal.style.display = 'none';
     });
 
+    const btnDownloadAllTopo = document.getElementById('btn-download-all-topo');
+    if (btnDownloadAllTopo) {
+        btnDownloadAllTopo.addEventListener('click', async () => {
+            const files = [
+                'Buitrera_17Feb2026.dwg',
+                'Buitrera_23Marzo2026.dwg',
+                'ACAD-Buitrera_17Feb2026-Model.dwg'
+            ];
+            
+            const originalText = btnDownloadAllTopo.textContent;
+            btnDownloadAllTopo.textContent = 'Preparing Zip...';
+            btnDownloadAllTopo.style.opacity = '0.7';
+            btnDownloadAllTopo.pointerEvents = 'none';
+
+            try {
+                const zip = new JSZip();
+                
+                for (const file of files) {
+                    const response = await fetch(file);
+                    if (!response.ok) throw new Error(`Could not fetch ${file}`);
+                    const blob = await response.blob();
+                    zip.file(file, blob);
+                }
+                
+                const content = await zip.generateAsync({ type: 'blob' });
+                
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(content);
+                link.download = 'Topography_DWG_Files.zip';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            } catch (error) {
+                console.error("Error creating zip file:", error);
+                alert("There was an error generating the zip file. Please try downloading manually.");
+            } finally {
+                btnDownloadAllTopo.textContent = originalText;
+                btnDownloadAllTopo.style.opacity = '1';
+                btnDownloadAllTopo.pointerEvents = 'auto';
+                topoModal.style.display = 'none';
+            }
+        });
+    }
+
     // Project Description Modal
     const descModal = document.getElementById('description-modal');
     document.getElementById('btn-project-description').addEventListener('click', () => {

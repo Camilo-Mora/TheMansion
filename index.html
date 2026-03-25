@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE MANSION | Architect Reference Portfolio</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 
 <body>
@@ -84,10 +85,10 @@
         <div class="modal-content">
             <div id="modal-close" class="close-btn">&times;</div>
             <h3>Download Topography</h3>
-            <p>Download the topography of the site, a DWG file.</p>
+            <p>Download the topography and altimetry contours of the site.</p>
             <div style="margin-top: 30px;">
-                <a href="Buitrera_17Feb2026.dwg" download class="btn-back-map"
-                    style="background: var(--accent-color); color: var(--bg-color);">Download DWG</a>
+                <button id="btn-download-all-topo" class="btn-back-map"
+                    style="background: var(--accent-color); color: var(--bg-color); border: none; cursor: pointer; padding: 10px 20px; font-family: inherit; font-size: 1rem;">Download 3 DWG Files</button>
             </div>
         </div>
     </div>
