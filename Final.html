@@ -42,45 +42,12 @@
       letter-spacing: 3px;
     }
 
-    /* ─── TOP BAR ────────────────────────────────────────── */
-    #topbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--bar-h);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 20px 0 200px;
-      background: rgba(10,10,10,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(184,146,74,0.25);
-      z-index: 1000;
-      overflow-x: auto;
-      flex-wrap: nowrap;
-    }
-    #page-title {
-      position: fixed;
-      top: 0; left: 18px;
-      height: var(--bar-h);
-      display: flex;
-      align-items: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 300;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #fff;
-      z-index: 1001;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-
     /* ─── CONTROL BUTTONS ────────────────────────────────── */
     .ctrl-btn {
-      background: rgba(255,255,255,0.05);
+      background: var(--surface);
       border: 1px solid var(--gold);
       color: var(--gold);
-      padding: 5px 12px;
+      padding: 6px 12px;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.65rem;
       text-transform: uppercase;
@@ -93,6 +60,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
     .ctrl-btn:hover, .ctrl-btn.active {
       background: var(--gold);
@@ -109,36 +77,31 @@
 
     /* ─── MAIN LAYOUT ────────────────────────────────────── */
     main {
-      padding-top: var(--bar-h);
+      padding-top: 30px;
       min-height: 100vh;
     }
 
-    /* ─── PAGE HEADER ────────────────────────────────────── */
-    .page-hero {
-      text-align: center;
-      padding: 60px 40px 40px;
-      border-bottom: 1px solid rgba(0,0,0,0.07);
+    /* ─── SIDEBAR CONTROLS ────────────────────────────────── */
+    #sidebar-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 170px;
+      flex-shrink: 0;
+      margin-top: 10px;
     }
-    .page-hero h1 {
-      font-size: clamp(1.6rem, 3vw, 2.6rem);
-      font-weight: 300;
-      margin-bottom: 10px;
-    }
-    .page-hero p {
-      color: var(--muted);
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-    }
-    .gold-line {
-      width: 50px; height: 2px;
-      background: var(--gold);
-      margin: 18px auto;
+
+    .plans-layout-wrapper {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      justify-content: center;
     }
 
     /* ─── FLOOR PLAN SECTION ─────────────────────────────── */
     #plans-section {
       padding: 15px 30px 0;
-      max-width: 1000px;
+      max-width: 920px;
       margin: 0 auto;
     }
 
@@ -148,6 +111,17 @@
       gap: 30px;
     }
     @media (max-width: 600px) {
+      .plans-layout-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      #sidebar-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+      }
       .plans-grid {
         flex-direction: column;
         align-items: center;
@@ -472,30 +446,29 @@
 
 <body>
 
-  <!-- TOP BAR -->
-  <div id="page-title">The Mansion</div>
-  <div id="topbar">
-    <button class="ctrl-btn" id="btn-lock" title="Toggle edit mode">
-      <span>🔒</span><span>Locked</span>
-    </button>
-    <button class="ctrl-btn" id="btn-add-upper" style="display:none">
-      ＋ Hotspot (Upper)
-    </button>
-    <button class="ctrl-btn" id="btn-add-lower" style="display:none">
-      ＋ Hotspot (Lower)
-    </button>
-    <button class="ctrl-btn" id="btn-export" style="display:none">
-      ⬇ Export JSON
-    </button>
-    <button class="ctrl-btn danger" id="btn-delete" style="display:none">
-      🗑 Delete Selected
-    </button>
-  </div>
-
   <main>
     <!-- FLOOR PLANS -->
     <section id="plans-section">
-      <div class="plans-grid">
+      <div class="plans-layout-wrapper">
+        <div id="sidebar-controls">
+          <button class="ctrl-btn" id="btn-lock" title="Toggle edit mode">
+            <span>🔒</span><span>Locked</span>
+          </button>
+          <button class="ctrl-btn" id="btn-add-upper" style="display:none">
+            ＋ Hotspot (Upper)
+          </button>
+          <button class="ctrl-btn" id="btn-add-lower" style="display:none">
+            ＋ Hotspot (Lower)
+          </button>
+          <button class="ctrl-btn" id="btn-export" style="display:none">
+            ⬇ Export JSON
+          </button>
+          <button class="ctrl-btn danger" id="btn-delete" style="display:none">
+            🗑 Delete Selected
+          </button>
+        </div>
+
+        <div class="plans-grid">
 
         <!-- UPPER -->
         <div class="plan-panel" id="panel-upper">
@@ -522,6 +495,7 @@
         </div>
 
       </div>
+    </div>
     </section>
 
     <!-- REVEAL PANEL -->
@@ -705,100 +679,93 @@
     }, 100);
   }
 
-  function populateReveal(hs) {
+  async function populateReveal(hs) {
     document.getElementById('reveal-title').textContent = hs.label;
     const container = document.getElementById('reveal-images');
+    container.innerHTML = '<div class="reveal-empty">Loading gallery...</div>';
+
+    const extensions = ['jpg', 'png', 'jpeg', 'mp4', 'mov', 'webm'];
+    const prefixes = [hs.prefix];
+    const lower = hs.prefix.toLowerCase();
+    if (lower !== hs.prefix) {
+      prefixes.push(lower);
+    }
+
+    const promises = [];
+
+    // Probe indices from 00 to 15
+    for (let i = 0; i <= 15; i++) {
+      const numStr = i < 10 ? '0' + i : '' + i;
+      prefixes.forEach(pref => {
+        extensions.forEach(ext => {
+          const filename = `${pref}_${numStr}.${ext}`;
+          const src = IMAGES_BASE + filename;
+
+          const p = new Promise(resolve => {
+            if (['mp4', 'mov', 'webm'].includes(ext)) {
+              const video = document.createElement('video');
+              video.onloadedmetadata = () => resolve({ filename, src, type: 'video', index: i });
+              video.onerror = () => resolve(null);
+              video.src = src;
+            } else {
+              const img = new Image();
+              img.onload = () => resolve({ filename, src, type: 'image', index: i });
+              img.onerror = () => resolve(null);
+              img.src = src;
+            }
+          });
+          promises.push(p);
+        });
+      });
+    }
+
+    const results = await Promise.all(promises);
+    const validResults = [];
+    const seenFiles = new Set();
+
+    results.forEach(r => {
+      if (r !== null && !seenFiles.has(r.filename)) {
+        seenFiles.add(r.filename);
+        validResults.push(r);
+      }
+    });
+
+    // Sort by index (00, 01, 02...)
+    validResults.sort((a, b) => a.index - b.index);
+
     container.innerHTML = '';
 
-    const matched = getMatchingFiles(hs.prefix);
-
-    if (matched.length === 0) {
-      container.innerHTML = `<div class="reveal-empty">No images found for prefix "${hs.prefix}" in Final/</div>`;
+    if (validResults.length === 0) {
+      container.innerHTML = `<div class="reveal-empty">No images or videos found for prefix "${hs.prefix}" in Final/</div>`;
       return;
     }
 
-    matched.forEach((filename, i) => {
+    validResults.forEach((res, i) => {
       const item = document.createElement('div');
       item.className = 'reveal-item';
       item.style.animationDelay = (i * 0.06) + 's';
 
-      const isVideo = /\.(mp4|webm|mov)$/i.test(filename);
       let media;
-      if (isVideo) {
+      if (res.type === 'video') {
         media = document.createElement('video');
-        media.src = IMAGES_BASE + filename;
+        media.src = res.src;
         media.controls = true;
         media.style.width = '100%';
       } else {
         media = document.createElement('img');
-        media.src = IMAGES_BASE + filename;
-        media.alt = filename;
+        media.src = res.src;
+        media.alt = res.filename;
         media.loading = 'lazy';
       }
 
       const cap = document.createElement('div');
       cap.className = 'reveal-caption';
-      cap.textContent = filename;
+      cap.textContent = res.filename;
 
       item.appendChild(media);
       item.appendChild(cap);
       container.appendChild(item);
     });
-  }
-
-  /* Match files whose name starts with the given prefix (case-insensitive) */
-  function getMatchingFiles(prefix) {
-    const p = prefix.toLowerCase();
-    return allFiles.filter(f => f.toLowerCase().startsWith(p)).sort();
-  }
-
-  /* ══════════════════════════════════════════════════════
-     FILE DISCOVERY
-     We derive the file list from the hotspot prefixes
-     present in the config + a known-file manifest approach.
-     Since we can't list a directory from the browser we
-     rely on the hotspots.json to declare the file list,
-     OR we just try to load each file and show what loads.
-
-     For simplicity: store a `files` array in hotspots.json
-     at the top level, or we use a brute-force manifest
-     embedded in the page that the user can update.
-
-     Cleanest approach: embed a FILES array derived from
-     the actual Final/ folder at page build time.
-  ══════════════════════════════════════════════════════ */
-  // This is the manifest — update whenever you add files to Final/
-  // (or store it inside hotspots.json as a "files" key)
-  const KNOWN_FILES = [
-    'BBQ_01.jpg',
-    'Bathroom_01.jpg',
-    'Bunkbed_01.png',
-    'CoreArea_01.jpg',
-    'CoreArea_02.jpg',
-    'Kitchen_01.jpg',
-    'Kitchen_02.jpg',
-    'Kitchen_03.jpg',
-    'LobbyA_01.jpg',
-    'LobbyA_02.png',
-    'LobbyA_03.jpg',
-    'Lookout_01.jpg',
-    'Pool_01.png',
-    'Pool_02.jpg',
-    'Pool_03.jpg',
-    'Ramp_01.jpg',
-    'Ramp_02.jpg',
-    'Room_01.png',
-    'Room_02.jpg',
-    'Room_03.jpg'
-  ];
-
-  /* Override with any `files` array declared in hotspots.json */
-  function resolveFiles() {
-    if (config.files && Array.isArray(config.files)) {
-      allFiles = config.files;
-    } else {
-      allFiles = KNOWN_FILES;
-    }
   }
 
   /* ══════════════════════════════════════════════════════
@@ -1020,7 +987,6 @@
      START
   ══════════════════════════════════════════════════════ */
   document.addEventListener('DOMContentLoaded', () => {
-    resolveFiles();
     boot();
   });
   </script>
