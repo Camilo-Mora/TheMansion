@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE MANSION | Floor Plan Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────── */
+    :root {
+      --bg:          #f5f4f1;
+      --surface:     #ffffff;
+      --text:        #1a1a1a;
+      --muted:       rgba(0,0,0,0.45);
+      --gold:        #b8924a;
+      --gold-light:  rgba(184,146,74,0.15);
+      --gold-glow:   rgba(184,146,74,0.35);
+      --red:         #d32f2f;
+      --red-light:   rgba(211,47,47,0.15);
+      --red-glow:    rgba(211,47,47,0.35);
+      --dark:        #0d0d0d;
+      --bar-h:       52px;
+      --radius:      6px;
+      --ease:        cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    /* ─── TOP BAR ────────────────────────────────────────── */
+    #topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--bar-h);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 20px 0 200px;
+      background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(184,146,74,0.25);
+      z-index: 1000;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+    #page-title {
+      position: fixed;
+      top: 0; left: 18px;
+      height: var(--bar-h);
+      display: flex;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #fff;
+      z-index: 1001;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* ─── CONTROL BUTTONS ────────────────────────────────── */
+    .ctrl-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 5px 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: all 0.3s var(--ease);
+      white-space: nowrap;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .ctrl-btn:hover, .ctrl-btn.active {
+      background: var(--gold);
+      color: var(--dark);
+    }
+    .ctrl-btn.danger {
+      border-color: #e55;
+      color: #e55;
+    }
+    .ctrl-btn.danger:hover {
+      background: #e55;
+      color: #fff;
+    }
+
+    /* ─── MAIN LAYOUT ────────────────────────────────────── */
+    main {
+      padding-top: var(--bar-h);
+      min-height: 100vh;
+    }
+
+    /* ─── PAGE HEADER ────────────────────────────────────── */
+    .page-hero {
+      text-align: center;
+      padding: 60px 40px 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .page-hero h1 {
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .page-hero p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+    .gold-line {
+      width: 50px; height: 2px;
+      background: var(--gold);
+      margin: 18px auto;
+    }
+
+    /* ─── FLOOR PLAN SECTION ─────────────────────────────── */
+    #plans-section {
+      padding: 50px 30px 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    @media (max-width: 900px) {
+      .plans-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── SINGLE FLOOR PLAN PANEL ────────────────────────── */
+    .plan-panel {
+      background: var(--surface);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .plan-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .plan-header h2 {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+    }
+    .plan-header .hs-count {
+      font-size: 0.65rem;
+      color: var(--muted);
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* ─── IMAGE + HOTSPOT LAYER ──────────────────────────── */
+    .plan-img-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #eee;
+      cursor: default;
+      user-select: none;
+    }
+    .plan-img-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+
+    /* ─── HOTSPOT BUTTON ─────────────────────────────────── */
+    .hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.2s var(--ease);
+    }
+    .hotspot:hover { transform: translate(-50%, -50%) scale(1.12); }
+
+    .hs-icon {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      border: 1.5px solid var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 0 0 2px var(--red-light);
+      transition: all 0.25s var(--ease);
+      position: relative;
+    }
+    .hs-icon svg {
+      width: 9px; height: 9px;
+      fill: var(--red);
+    }
+    .hotspot.active .hs-icon {
+      background: var(--red);
+      box-shadow: 0 2px 10px var(--red-glow), 0 0 0 3px var(--red-light);
+    }
+    .hotspot.active .hs-icon svg { fill: #fff; }
+
+    /* pulse ring only on inactive */
+    .hs-icon::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid rgba(211,47,47,0.45);
+      animation: pulse-ring 2s ease-out infinite;
+    }
+    .hotspot.active .hs-icon::after { display: none; }
+
+    @keyframes pulse-ring {
+      0%   { transform: scale(0.85); opacity: 0.9; }
+      70%  { transform: scale(1.4);  opacity: 0;   }
+      100% { transform: scale(1.4);  opacity: 0;   }
+    }
+
+    .hs-label {
+      background: rgba(255,255,255,0.93);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      white-space: nowrap;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+      border: 1px solid rgba(211,47,47,0.25);
+      pointer-events: none;
+    }
+    .hotspot.active .hs-label {
+      background: var(--red);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    /* Edit-mode drag handle */
+    .hotspot.edit-mode {
+      cursor: grab;
+    }
+    .hotspot.edit-mode:active { cursor: grabbing; }
+    .hotspot.edit-mode .hs-icon::before {
+      content: '✥';
+      position: absolute;
+      font-size: 0.6rem;
+      color: rgba(211,47,47,0.7);
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* ─── IMAGE REVEAL PANEL ─────────────────────────────── */
+    #reveal-panel {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 30px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.55s var(--ease), padding 0.35s var(--ease);
+    }
+    #reveal-panel.open {
+      max-height: 9000px; /* large enough */
+      padding: 0 30px 60px;
+    }
+
+    .reveal-inner {
+      background: var(--surface);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-top: 3px solid var(--gold);
+      border-radius: 0 0 10px 10px;
+      padding: 30px 36px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      margin-top: -1px; /* kiss the plans-section bottom */
+    }
+
+    .reveal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .reveal-header h3 {
+      font-size: 1rem;
+      letter-spacing: 5px;
+      color: var(--gold);
+    }
+    #reveal-close {
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    #reveal-close:hover { color: var(--gold); }
+
+    /* Vertical stack of images */
+    #reveal-images {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .reveal-item {
+      width: 100%;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: item-in 0.4s var(--ease) forwards;
+    }
+    @keyframes item-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal-item img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .reveal-item video {
+      display: block;
+      max-width: 100%;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .reveal-caption {
+      margin-top: 6px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+    }
+    .reveal-empty {
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 40px 0;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* ─── EDIT PANEL (floating) ──────────────────────────── */
+    #edit-panel {
+      display: none;
+      position: fixed;
+      top: 66px; right: 18px;
+      z-index: 2000;
+      background: rgba(10,10,10,0.93);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 18px;
+      width: 220px;
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+    }
+    #edit-panel.visible { display: flex; flex-direction: column; gap: 10px; }
+    #edit-panel h4 {
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-align: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(184,146,74,0.2);
+    }
+    .ep-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .ep-row label {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.65);
+      white-space: nowrap;
+    }
+    .ep-row input[type="text"],
+    .ep-row input[type="number"] {
+      width: 70px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+    .ep-row input:focus {
+      border-color: var(--gold);
+      outline: none;
+    }
+    .ep-row input[type="text"] { width: 120px; text-align: left; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 2px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      margin-top: 40px;
+    }
+
+    /* ─── BACK LINK ──────────────────────────────────────── */
+    .back-link {
+      display: inline-block;
+      margin: 40px auto 0;
+      text-align: center;
+      width: 100%;
+      text-decoration: none;
+      color: var(--muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    /* ─── SCROLLBAR ──────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.04); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div id="page-title">The Mansion</div>
+  <div id="topbar">
+    <button class="ctrl-btn" id="btn-lock" title="Toggle edit mode">
+      <span>🔒</span><span>Locked</span>
+    </button>
+    <button class="ctrl-btn" id="btn-add-upper" style="display:none">
+      ＋ Hotspot (Upper)
+    </button>
+    <button class="ctrl-btn" id="btn-add-lower" style="display:none">
+      ＋ Hotspot (Lower)
+    </button>
+    <button class="ctrl-btn" id="btn-export" style="display:none">
+      ⬇ Export JSON
+    </button>
+    <button class="ctrl-btn danger" id="btn-delete" style="display:none">
+      🗑 Delete Selected
+    </button>
+  </div>
+
+  <main>
+    <!-- FLOOR PLANS -->
+    <section id="plans-section">
+      <div class="plans-grid">
+
+        <!-- UPPER -->
+        <div class="plan-panel" id="panel-upper">
+          <div class="plan-header">
+            <h2 id="label-upper">Upper Level</h2>
+            <span class="hs-count" id="count-upper">0 hotspots</span>
+          </div>
+          <div class="plan-img-wrap" id="wrap-upper">
+            <img id="img-upper" src="" alt="Upper Level Floor Plan">
+            <!-- hotspots injected here -->
+          </div>
+        </div>
+
+        <!-- LOWER -->
+        <div class="plan-panel" id="panel-lower">
+          <div class="plan-header">
+            <h2 id="label-lower">Lower Level</h2>
+            <span class="hs-count" id="count-lower">0 hotspots</span>
+          </div>
+          <div class="plan-img-wrap" id="wrap-lower">
+            <img id="img-lower" src="" alt="Lower Level Floor Plan">
+            <!-- hotspots injected here -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REVEAL PANEL -->
+    <div id="reveal-panel">
+      <div class="reveal-inner">
+        <div class="reveal-header">
+          <h3 id="reveal-title">Zone Name</h3>
+          <div id="reveal-close">&#x2715;</div>
+        </div>
+        <div id="reveal-images"></div>
+      </div>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to full project</a>
+  </main>
+
+  <!-- EDIT PANEL (floating) -->
+  <div id="edit-panel">
+    <h4>Edit Hotspot</h4>
+    <div class="ep-row"><label>Label</label><input type="text" id="ep-label"></div>
+    <div class="ep-row"><label>Prefix</label><input type="text" id="ep-prefix"></div>
+    <div class="ep-row"><label>X %</label><input type="number" id="ep-x" step="0.1"></div>
+    <div class="ep-row"><label>Y %</label><input type="number" id="ep-y" step="0.1"></div>
+  </div>
+
+  <footer>&copy; 2026 THE MANSION PROJECT | ARCHITECTURAL VISION</footer>
+
+  <script>
+  /* ══════════════════════════════════════════════════════
+     CONFIG — only hotspots.json in Final/ is external
+  ══════════════════════════════════════════════════════ */
+  const HOTSPOTS_URL = 'Final/hotspots.json';
+  const IMAGES_BASE  = 'Final/';
+
+  /* ══════════════════════════════════════════════════════
+     STATE
+  ══════════════════════════════════════════════════════ */
+  let config = {
+    upper: {
+      label: "Upper Level",
+      image: "Level_Upper.png",
+      hotspots: [
+        { id: "living",   label: "Living",    prefix: "LobbyA",   x: 38.0, y: 22.0 },
+        { id: "core",     "label": "Core Area", prefix: "CoreArea", x: 38.0, y: 44.0 },
+        { id: "kitchen",  label: "Kitchen",   prefix: "Kitchen",  x: 44.0, y: 50.0 },
+        { id: "pool",     label: "Pool",      prefix: "Pool",     x: 40.0, y: 68.0 },
+        { id: "bbq",      label: "BBQ",       prefix: "BBQ",      x: 68.0, y: 83.0 },
+        { id: "ramp",     label: "Ramp",      prefix: "Ramp",     x: 38.0, y: 56.0 }
+      ]
+    },
+    lower: {
+      label: "Lower Level",
+      image: "Level_Lower.png",
+      hotspots: [
+        { id: "lookout",  label: "Lookout",  prefix: "Lookout",  x: 24.0, y: 9.0  },
+        { id: "room",     label: "Rooms",    prefix: "Room",     x: 28.0, y: 70.0 },
+        { id: "bunkbed",  label: "Bunk Bed", prefix: "Bunkbed",  x: 73.0, y: 70.0 },
+        { id: "bathroom", label: "Bathroom", prefix: "Bathroom", x: 28.0, y: 80.0 },
+        { id: "pool_lo",  label: "Pool",     prefix: "Pool",     x: 50.0, y: 52.0 }
+      ]
+    }
+  };
+  let editMode      = false;
+  let activeHotspot = null;   // { level, id }
+  let selectedHs    = null;   // { level, id } — selected in edit mode
+
+  /* Cache all available filenames in Final/ (populated from hotspots.json load) */
+  let allFiles = [];
+
+  /* ══════════════════════════════════════════════════════
+     BOOT
+  ══════════════════════════════════════════════════════ */
+  async function boot() {
+    try {
+      const resp = await fetch(HOTSPOTS_URL + '?_=' + Date.now());
+      if (!resp.ok) throw new Error('Cannot load hotspots.json');
+      config = await resp.json();
+    } catch(e) {
+      console.warn('hotspots.json not found or invalid — using defaults.', e);
+    }
+
+    // Populate image src from config
+    document.getElementById('img-upper').src = config.upper.image  || 'Level_Upper.png';
+    document.getElementById('img-lower').src = config.lower.image  || 'Level_Lower.png';
+    document.getElementById('label-upper').textContent = config.upper.label || 'Upper Level';
+    document.getElementById('label-lower').textContent = config.lower.label || 'Lower Level';
+
+    renderHotspots('upper');
+    renderHotspots('lower');
+    updateCounts();
+    bindControls();
+  }
+
+  /* ══════════════════════════════════════════════════════
+     RENDER HOTSPOTS
+  ══════════════════════════════════════════════════════ */
+  function renderHotspots(level) {
+    const wrap = document.getElementById('wrap-' + level);
+    // Remove existing hotspot elements
+    wrap.querySelectorAll('.hotspot').forEach(el => el.remove());
+
+    config[level].hotspots.forEach(hs => {
+      const el = buildHotspotEl(hs, level);
+      wrap.appendChild(el);
+    });
+  }
+
+  function buildHotspotEl(hs, level) {
+    const el = document.createElement('div');
+    el.className = 'hotspot';
+    el.dataset.id = hs.id;
+    el.dataset.level = level;
+    el.style.left = hs.x + '%';
+    el.style.top  = hs.y + '%';
+
+    el.innerHTML = `
+      <div class="hs-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7zm0
+                   9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+        </svg>
+      </div>
+      <div class="hs-label">${hs.label}</div>
+    `;
+
+    /* --- Camera SVG icon instead of pin for the icon --- */
+    el.querySelector('.hs-icon').innerHTML = cameraSVG();
+
+    el.addEventListener('mousedown', e => {
+      if (editMode) {
+        e.stopPropagation();
+        startDrag(e, el, hs, level);
+        selectHotspot(level, hs.id);
+      } else {
+        e.preventDefault();
+        toggleReveal(level, hs);
+      }
+    });
+
+    return el;
+  }
+
+  function cameraSVG() {
+    return `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 5h-2.586l-2.707-2.707A1 1 0 0 0 14 2h-4a1 1 0 0 0-.707.293L6.586 5H4
+               a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm-8 11
+               a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+    </svg>`;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     REVEAL PANEL
+  ══════════════════════════════════════════════════════ */
+  function toggleReveal(level, hs) {
+    const panel    = document.getElementById('reveal-panel');
+    const isActive = activeHotspot && activeHotspot.level === level && activeHotspot.id === hs.id;
+
+    // Deactivate all hotspot visuals
+    document.querySelectorAll('.hotspot').forEach(el => el.classList.remove('active'));
+
+    if (isActive) {
+      // Close
+      panel.classList.remove('open');
+      activeHotspot = null;
+      return;
+    }
+
+    // Activate this hotspot visually
+    const el = document.querySelector(`.hotspot[data-level="${level}"][data-id="${hs.id}"]`);
+    if (el) el.classList.add('active');
+
+    activeHotspot = { level, id: hs.id };
+
+    // Populate images
+    populateReveal(hs);
+    panel.classList.add('open');
+
+    // Scroll reveal into view
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function populateReveal(hs) {
+    document.getElementById('reveal-title').textContent = hs.label;
+    const container = document.getElementById('reveal-images');
+    container.innerHTML = '';
+
+    const matched = getMatchingFiles(hs.prefix);
+
+    if (matched.length === 0) {
+      container.innerHTML = `<div class="reveal-empty">No images found for prefix "${hs.prefix}" in Final/</div>`;
+      return;
+    }
+
+    matched.forEach((filename, i) => {
+      const item = document.createElement('div');
+      item.className = 'reveal-item';
+      item.style.animationDelay = (i * 0.06) + 's';
+
+      const isVideo = /\.(mp4|webm|mov)$/i.test(filename);
+      let media;
+      if (isVideo) {
+        media = document.createElement('video');
+        media.src = IMAGES_BASE + filename;
+        media.controls = true;
+        media.style.width = '100%';
+      } else {
+        media = document.createElement('img');
+        media.src = IMAGES_BASE + filename;
+        media.alt = filename;
+        media.loading = 'lazy';
+      }
+
+      const cap = document.createElement('div');
+      cap.className = 'reveal-caption';
+      cap.textContent = filename;
+
+      item.appendChild(media);
+      item.appendChild(cap);
+      container.appendChild(item);
+    });
+  }
+
+  /* Match files whose name starts with the given prefix (case-insensitive) */
+  function getMatchingFiles(prefix) {
+    const p = prefix.toLowerCase();
+    return allFiles.filter(f => f.toLowerCase().startsWith(p)).sort();
+  }
+
+  /* ══════════════════════════════════════════════════════
+     FILE DISCOVERY
+     We derive the file list from the hotspot prefixes
+     present in the config + a known-file manifest approach.
+     Since we can't list a directory from the browser we
+     rely on the hotspots.json to declare the file list,
+     OR we just try to load each file and show what loads.
+
+     For simplicity: store a `files` array in hotspots.json
+     at the top level, or we use a brute-force manifest
+     embedded in the page that the user can update.
+
+     Cleanest approach: embed a FILES array derived from
+     the actual Final/ folder at page build time.
+  ══════════════════════════════════════════════════════ */
+  // This is the manifest — update whenever you add files to Final/
+  // (or store it inside hotspots.json as a "files" key)
+  const KNOWN_FILES = [
+    'BBQ_01.jpg',
+    'Bathroom_01.jpg',
+    'Bunkbed_01.png',
+    'CoreArea_01.jpg',
+    'CoreArea_02.jpg',
+    'Kitchen_01.jpg',
+    'Kitchen_02.jpg',
+    'Kitchen_03.jpg',
+    'LobbyA_01.jpg',
+    'LobbyA_02.png',
+    'LobbyA_03.jpg',
+    'Lookout_01.jpg',
+    'Pool_01.png',
+    'Pool_02.jpg',
+    'Pool_03.jpg',
+    'Ramp_01.jpg',
+    'Ramp_02.jpg',
+    'Room_01.png',
+    'Room_02.jpg',
+    'Room_03.jpg'
+  ];
+
+  /* Override with any `files` array declared in hotspots.json */
+  function resolveFiles() {
+    if (config.files && Array.isArray(config.files)) {
+      allFiles = config.files;
+    } else {
+      allFiles = KNOWN_FILES;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     EDIT MODE — DRAG
+  ══════════════════════════════════════════════════════ */
+  function startDrag(evt, el, hs, level) {
+    const wrap = document.getElementById('wrap-' + level);
+    const rect = wrap.getBoundingClientRect();
+
+    const startX = evt.clientX;
+    const startY = evt.clientY;
+    const startHsX = hs.x;
+    const startHsY = hs.y;
+
+    function onMove(e) {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      hs.x = Math.min(100, Math.max(0, startHsX + (dx / rect.width)  * 100));
+      hs.y = Math.min(100, Math.max(0, startHsY + (dy / rect.height) * 100));
+      el.style.left = hs.x + '%';
+      el.style.top  = hs.y + '%';
+      updateEditPanel();
+    }
+
+    function onUp() {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    }
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     SELECT A HOTSPOT IN EDIT MODE
+  ══════════════════════════════════════════════════════ */
+  function selectHotspot(level, id) {
+    selectedHs = { level, id };
+    document.querySelectorAll('.hotspot').forEach(el => el.style.outline = '');
+    const el = document.querySelector(`.hotspot[data-level="${level}"][data-id="${id}"]`);
+    if (el) el.style.outline = '2px dashed #e55';
+    updateEditPanel();
+    document.getElementById('btn-delete').style.display = 'inline-flex';
+  }
+
+  function clearSelection() {
+    selectedHs = null;
+    document.querySelectorAll('.hotspot').forEach(el => el.style.outline = '');
+    document.getElementById('btn-delete').style.display = 'none';
+    document.getElementById('edit-panel').classList.remove('visible');
+  }
+
+  /* ══════════════════════════════════════════════════════
+     EDIT PANEL SYNC
+  ══════════════════════════════════════════════════════ */
+  function updateEditPanel() {
+    if (!selectedHs) return;
+    const hs = getHotspot(selectedHs.level, selectedHs.id);
+    if (!hs) return;
+    const ep = document.getElementById('edit-panel');
+    ep.classList.add('visible');
+    document.getElementById('ep-label').value  = hs.label;
+    document.getElementById('ep-prefix').value = hs.prefix;
+    document.getElementById('ep-x').value      = hs.x.toFixed(1);
+    document.getElementById('ep-y').value      = hs.y.toFixed(1);
+  }
+
+  function getHotspot(level, id) {
+    return config[level].hotspots.find(h => h.id === id);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     BIND EDIT PANEL INPUTS
+  ══════════════════════════════════════════════════════ */
+  function bindEditInputs() {
+    document.getElementById('ep-label').addEventListener('input', e => {
+      if (!selectedHs) return;
+      const hs = getHotspot(selectedHs.level, selectedHs.id);
+      if (!hs) return;
+      hs.label = e.target.value;
+      const el = document.querySelector(`.hotspot[data-level="${selectedHs.level}"][data-id="${selectedHs.id}"] .hs-label`);
+      if (el) el.textContent = hs.label;
+    });
+    document.getElementById('ep-prefix').addEventListener('input', e => {
+      if (!selectedHs) return;
+      const hs = getHotspot(selectedHs.level, selectedHs.id);
+      if (hs) hs.prefix = e.target.value;
+    });
+    document.getElementById('ep-x').addEventListener('input', e => {
+      if (!selectedHs) return;
+      const hs = getHotspot(selectedHs.level, selectedHs.id);
+      if (!hs) return;
+      hs.x = parseFloat(e.target.value) || hs.x;
+      const el = document.querySelector(`.hotspot[data-level="${selectedHs.level}"][data-id="${selectedHs.id}"]`);
+      if (el) el.style.left = hs.x + '%';
+    });
+    document.getElementById('ep-y').addEventListener('input', e => {
+      if (!selectedHs) return;
+      const hs = getHotspot(selectedHs.level, selectedHs.id);
+      if (!hs) return;
+      hs.y = parseFloat(e.target.value) || hs.y;
+      const el = document.querySelector(`.hotspot[data-level="${selectedHs.level}"][data-id="${selectedHs.id}"]`);
+      if (el) el.style.top = hs.y + '%';
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════
+     ADD / DELETE HOTSPOT
+  ══════════════════════════════════════════════════════ */
+  let _hsCounter = 1000;
+
+  function addHotspot(level) {
+    const id  = 'hs_' + (_hsCounter++);
+    const hs  = { id, label: 'New Zone', prefix: 'Zone', x: 50, y: 50 };
+    config[level].hotspots.push(hs);
+    const wrap = document.getElementById('wrap-' + level);
+    const el   = buildHotspotEl(hs, level);
+    el.classList.add('edit-mode');
+    wrap.appendChild(el);
+    updateCounts();
+    selectHotspot(level, id);
+    updateEditPanel();
+  }
+
+  function deleteSelected() {
+    if (!selectedHs) return;
+    const arr = config[selectedHs.level].hotspots;
+    const idx = arr.findIndex(h => h.id === selectedHs.id);
+    if (idx > -1) arr.splice(idx, 1);
+    const el = document.querySelector(`.hotspot[data-level="${selectedHs.level}"][data-id="${selectedHs.id}"]`);
+    if (el) el.remove();
+    clearSelection();
+    updateCounts();
+    // Close reveal if the deleted hotspot was open
+    if (activeHotspot && activeHotspot.level === selectedHs?.level && activeHotspot.id === selectedHs?.id) {
+      document.getElementById('reveal-panel').classList.remove('open');
+      activeHotspot = null;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     COUNTS
+  ══════════════════════════════════════════════════════ */
+  function updateCounts() {
+    ['upper','lower'].forEach(lv => {
+      const n = config[lv].hotspots.length;
+      document.getElementById('count-' + lv).textContent = n + ' hotspot' + (n !== 1 ? 's' : '');
+    });
+  }
+
+  /* ══════════════════════════════════════════════════════
+     EXPORT JSON
+  ══════════════════════════════════════════════════════ */
+  function exportJSON() {
+    const text = JSON.stringify(config, null, 2);
+    
+    // Create a blob and triggers download of hotspots.json
+    const blob = new Blob([text], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'hotspots.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     TOGGLE EDIT MODE
+  ══════════════════════════════════════════════════════ */
+  function setEditMode(on) {
+    editMode = on;
+    const btn = document.getElementById('btn-lock');
+
+    // Close reveal panel when entering edit mode
+    if (on) {
+      document.getElementById('reveal-panel').classList.remove('open');
+      document.querySelectorAll('.hotspot').forEach(el => el.classList.remove('active'));
+      activeHotspot = null;
+    } else {
+      clearSelection();
+    }
+
+    document.querySelectorAll('.hotspot').forEach(el => {
+      el.classList.toggle('edit-mode', on);
+    });
+
+    btn.innerHTML = on
+      ? `<span>🔓</span><span>Edit Mode</span>`
+      : `<span>🔒</span><span>Locked</span>`;
+    btn.classList.toggle('active', on);
+
+    ['btn-add-upper','btn-add-lower','btn-export'].forEach(id => {
+      document.getElementById(id).style.display = on ? 'inline-flex' : 'none';
+    });
+    if (!on) document.getElementById('btn-delete').style.display = 'none';
+  }
+
+  /* ══════════════════════════════════════════════════════
+     BIND ALL CONTROLS
+  ══════════════════════════════════════════════════════ */
+  function bindControls() {
+    document.getElementById('btn-lock').addEventListener('click', () => setEditMode(!editMode));
+    document.getElementById('btn-add-upper').addEventListener('click', () => addHotspot('upper'));
+    document.getElementById('btn-add-lower').addEventListener('click', () => addHotspot('lower'));
+    document.getElementById('btn-export').addEventListener('click', exportJSON);
+    document.getElementById('btn-delete').addEventListener('click', deleteSelected);
+    document.getElementById('reveal-close').addEventListener('click', () => {
+      document.getElementById('reveal-panel').classList.remove('open');
+      document.querySelectorAll('.hotspot').forEach(el => el.classList.remove('active'));
+      activeHotspot = null;
+    });
+
+    bindEditInputs();
+  }
+
+  /* ══════════════════════════════════════════════════════
+     START
+  ══════════════════════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', () => {
+    resolveFiles();
+    boot();
+  });
+  </script>
+
+</body>
+</html>

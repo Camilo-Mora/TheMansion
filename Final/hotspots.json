@@ -1,0 +1,84 @@
+{
+  "upper": {
+    "label": "Upper Level",
+    "image": "Level_Upper.png",
+    "hotspots": [
+      {
+        "id": "core",
+        "label": "Core Area",
+        "prefix": "CoreArea",
+        "x": 69.78484107579462,
+        "y": 21.376134196641495
+      },
+      {
+        "id": "kitchen",
+        "label": "Kitchen",
+        "prefix": "Kitchen",
+        "x": 55.49144254278728,
+        "y": 28.733566144843003
+      },
+      {
+        "id": "pool",
+        "label": "Pool",
+        "prefix": "Pool",
+        "x": 67.38386308068459,
+        "y": 65.73761341966414
+      },
+      {
+        "id": "bbq",
+        "label": "BBQ",
+        "prefix": "BBQ",
+        "x": 68,
+        "y": 83
+      },
+      {
+        "id": "ramp",
+        "label": "Ramp",
+        "prefix": "Ramp",
+        "x": 40.44498777506112,
+        "y": 48.157059854835715
+      },
+      {
+        "id": "hs_1000",
+        "label": "Lookout",
+        "prefix": "Lookout",
+        "x": 22.371638141809292,
+        "y": 21.041451771701112
+      }
+    ]
+  },
+  "lower": {
+    "label": "Lower Level",
+    "image": "Level_Lower.png",
+    "hotspots": [
+      {
+        "id": "room",
+        "label": "Rooms",
+        "prefix": "Room",
+        "x": 16.753056234718827,
+        "y": 13.601486720703079
+      },
+      {
+        "id": "bunkbed",
+        "label": "Bunk Bed",
+        "prefix": "Bunkbed",
+        "x": 62.73105134474328,
+        "y": 23.62152715103502
+      },
+      {
+        "id": "bathroom",
+        "label": "Bathroom",
+        "prefix": "Bathroom",
+        "x": 34.35696821515892,
+        "y": 9.000856379362252
+      },
+      {
+        "id": "hs_1001",
+        "label": "LobbyA",
+        "prefix": "LobbyA",
+        "x": 84.47432762836186,
+        "y": 52.147151520785414
+      }
+    ]
+  }
+}
