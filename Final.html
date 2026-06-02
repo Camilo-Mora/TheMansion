@@ -77,31 +77,15 @@
 
     /* ─── MAIN LAYOUT ────────────────────────────────────── */
     main {
-      padding-top: 30px;
+      padding-top: 5px;
       min-height: 100vh;
     }
 
     /* ─── SIDEBAR CONTROLS ────────────────────────────────── */
-    #sidebar-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 170px;
-      flex-shrink: 0;
-      margin-top: 10px;
-    }
-
-    .plans-layout-wrapper {
-      display: flex;
-      gap: 30px;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
     /* ─── FLOOR PLAN SECTION ─────────────────────────────── */
     #plans-section {
-      padding: 15px 30px 0;
-      max-width: 920px;
+      padding: 0 30px 0;
+      max-width: 700px;
       margin: 0 auto;
     }
 
@@ -111,17 +95,6 @@
       gap: 30px;
     }
     @media (max-width: 600px) {
-      .plans-layout-wrapper {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-      }
-      #sidebar-controls {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-      }
       .plans-grid {
         flex-direction: column;
         align-items: center;
@@ -412,13 +385,23 @@
 
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
-      text-align: center;
-      padding: 60px 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
       font-size: 0.72rem;
       color: var(--muted);
       letter-spacing: 2px;
       border-top: 1px solid rgba(0,0,0,0.06);
       margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    #footer-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     /* ─── BACK LINK ──────────────────────────────────────── */
@@ -449,26 +432,7 @@
   <main>
     <!-- FLOOR PLANS -->
     <section id="plans-section">
-      <div class="plans-layout-wrapper">
-        <div id="sidebar-controls">
-          <button class="ctrl-btn" id="btn-lock" title="Toggle edit mode">
-            <span>🔒</span><span>Locked</span>
-          </button>
-          <button class="ctrl-btn" id="btn-add-upper" style="display:none">
-            ＋ Hotspot (Upper)
-          </button>
-          <button class="ctrl-btn" id="btn-add-lower" style="display:none">
-            ＋ Hotspot (Lower)
-          </button>
-          <button class="ctrl-btn" id="btn-export" style="display:none">
-            ⬇ Export JSON
-          </button>
-          <button class="ctrl-btn danger" id="btn-delete" style="display:none">
-            🗑 Delete Selected
-          </button>
-        </div>
-
-        <div class="plans-grid">
+      <div class="plans-grid">
 
         <!-- UPPER -->
         <div class="plan-panel" id="panel-upper">
@@ -495,7 +459,6 @@
         </div>
 
       </div>
-    </div>
     </section>
 
     <!-- REVEAL PANEL -->
@@ -521,7 +484,26 @@
     <div class="ep-row"><label>Y %</label><input type="number" id="ep-y" step="0.1"></div>
   </div>
 
-  <footer>&copy; 2026 THE MANSION PROJECT | ARCHITECTURAL VISION</footer>
+  <footer>
+    <span>&copy; 2026 THE MANSION PROJECT | ARCHITECTURAL VISION</span>
+    <div id="footer-controls">
+      <button class="ctrl-btn" id="btn-lock" title="Toggle edit mode">
+        <span>🔒</span><span>Locked</span>
+      </button>
+      <button class="ctrl-btn" id="btn-add-upper" style="display:none">
+        ＋ Hotspot (Upper)
+      </button>
+      <button class="ctrl-btn" id="btn-add-lower" style="display:none">
+        ＋ Hotspot (Lower)
+      </button>
+      <button class="ctrl-btn" id="btn-export" style="display:none">
+        ⬇ Export JSON
+      </button>
+      <button class="ctrl-btn danger" id="btn-delete" style="display:none">
+        🗑 Delete Selected
+      </button>
+    </div>
+  </footer>
 
   <script>
   /* ══════════════════════════════════════════════════════
